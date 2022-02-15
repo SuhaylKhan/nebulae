@@ -12,6 +12,7 @@ class Server(db.Model):
 
   admin = db.relationship('User', back_populates='admin_servers')
   members = db.relationship('User', secondary=user_server, back_populates='joined_servers')
+  channels = db.relationship('Channel', back_populates='server')
 
   def to_dict(self):
     return {
