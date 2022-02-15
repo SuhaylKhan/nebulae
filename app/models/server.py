@@ -1,4 +1,5 @@
 from .db import db
+from .user_server import user_server
 
 class Server(db.Model):
   __tablename__ = 'servers'
@@ -10,6 +11,7 @@ class Server(db.Model):
   updated_at = db.Column(db.DateTime, nullable=False)
 
   admin = db.relationship('User', back_populates='admin_servers')
+  members = db.relationship('User', secondary=user_server, back_populates='joined_servers')
 
   def to_dict(self):
     return {
