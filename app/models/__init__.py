@@ -6,3 +6,4 @@ from .channel import Channel
 from .channel_message import ChannelMessage
 from .direct_channel import DirectChannel
 from .user_direct_channel import user_direct_channel
+from .direct_message import DirectMessage

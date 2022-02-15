@@ -18,6 +18,7 @@ class User(db.Model, UserMixin):
     joined_servers = db.relationship('Server', secondary=user_server, back_populates='members')
     channel_messages = db.relationship('ChannelMessage', back_populates='user')
     direct_channels = db.relationship('DirectChannel', secondary=user_direct_channel, back_populates='members')
+    direct_messages = db.relationship('DirectMessage', back_populates='user')
 
     @property
     def password(self):

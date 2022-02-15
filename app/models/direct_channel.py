@@ -9,6 +9,7 @@ class DirectChannel(db.Model):
   updated_at = db.Column(db.DateTime, nullable=False)
 
   members = db.relationship('User', secondary=user_direct_channel, back_populates='direct_channels')
+  messages = db.relationship('DirectMessage', back_populates='direct_channel')
 
   def to_dict(self):
     return {
