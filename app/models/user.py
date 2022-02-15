@@ -2,7 +2,7 @@ from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from .user_server import user_server
-
+from .user_direct_channel import user_direct_channel
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -17,6 +17,7 @@ class User(db.Model, UserMixin):
     admin_servers = db.relationship('Server', back_populates='admin')
     joined_servers = db.relationship('Server', secondary=user_server, back_populates='members')
     channel_messages = db.relationship('ChannelMessage', back_populates='user')
+    direct_channels = db.relationship('DirectChannel', secondary=user_direct_channel, back_populates='members')
 
     @property
     def password(self):
