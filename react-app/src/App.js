@@ -7,7 +7,6 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import AddServerForm from './components/AddServerForm'
 import HomePage from './components/HomePage';
-import Servers from './components/Servers';
 import EditServerForm from './components/EditServerForm';
 import Channels from './components/Channels';
 import { authenticate } from './store/session';
@@ -38,10 +37,6 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-
-        <ProtectedRoute path='/users/:id/servers' exact={true} >
-          <Servers />
-        </ProtectedRoute>
 
         <ProtectedRoute path='/servers/new' exact={true} >
           <AddServerForm />

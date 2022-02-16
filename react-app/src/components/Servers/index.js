@@ -8,7 +8,6 @@ function Servers() {
 
   return (
     <>
-      <h1>User's Servers</h1>
       {Object.keys(servers).map(serverId => {
         const server = servers[serverId]
         return (
