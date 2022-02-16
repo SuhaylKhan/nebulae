@@ -1,0 +1,67 @@
+#nav-bar {
+  margin: 0 auto;
+  max-width: 75%;
+}
+
+#nav-bar-list {
+  margin: 0;
+  padding: 30px 0;
+  display: grid;
+  grid-template-columns: 3fr 5fr 3fr;
+  list-style: none;
+}
+
+#nav-bar-list > * {
+  display: flex;
+  justify-content: center;
+}
+
+/* #home-button {
+  display: flex;
+  justify-content: center;
+} */
+
+#home-button > * {
+  margin: 0 auto;
+  width: fit-content;
+  font-size: 17px;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+#home-button > * > span {
+  font-size: 25px;
+}
+
+#home-button > *:hover {
+  color: var(--wildCard);
+}
+
+.nav-bar-navlink > * {
+  margin: 0 10px;
+  text-decoration: none;
+  color: var(--white3);
+}
+
+#login-signup {
+  /* display: flex;
+  justify-content: center; */
+  grid-column-start: 3;
+}
+
+.login-signup > * {
+  padding: 9px 20px;
+  font-size: 13.5px;
+  background-color: var(--main);
+  border-radius: 15px;
+  transition: 0.2s;
+}
+
+.login-signup > *:hover {
+  color: var(--black2);
+  box-shadow: 1px 2px 10px var(--black1);
+}
+
+#logout {
+  grid-column-start: 3;
+}

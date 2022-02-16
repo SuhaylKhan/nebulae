@@ -1,0 +1,13 @@
+#logout-button {
+  border: none;
+  background: none;
+  color: var(--white1);
+  font-size: 15px;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+#logout-button:hover {
+  color: var(--wildCard);
+  cursor: pointer;
+}
