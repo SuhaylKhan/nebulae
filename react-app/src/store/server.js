@@ -2,6 +2,7 @@ const ADD_SERVER = 'server/ADD_SERVER';
 const SET_SERVERS = 'server/SET_SERVERS';
 const REMOVE_ALL = 'server/REMOVE_ALL';
 const UPDATE_SERVER = 'server/UPDATE_SERVER';
+const REMOVE_ONE = 'server/REMOVE_ONE';
 
 const initialState = {}
 
@@ -22,6 +23,11 @@ const removeAll = () => ({
 const updateServer = server => ({
   type: UPDATE_SERVER,
   payload: server
+})
+
+const removeOne = serverId => ({
+  type: REMOVE_ONE,
+  payload: serverId
 })
 
 export const createServer = newServer => async dispatch => {
@@ -92,6 +98,19 @@ export const editServer = (serverId, serverName) => async dispatch => {
   }
 }
 
+export const deleteServer = serverId => async dispatch => {
+  const response = await fetch(`/api/servers/${serverId}/delete`, {
+    method: 'DELETE'
+  })
+
+  if (response.ok) {
+    dispatch(removeOne(serverId));
+    return 'DELETE SUCCESSFUL';
+  } else {
+    return { errors: ['An error occurred. Please try again.']}
+  }
+}
+
 export default function reducer(state = initialState, action) {
   let newState = {...state}
   switch (action.type) {
@@ -112,6 +131,9 @@ export default function reducer(state = initialState, action) {
       return newState;
     case UPDATE_SERVER:
       newState[action.payload.id] = action.payload;
+      return newState;
+    case REMOVE_ONE:
+      delete newState[action.payload];
       return newState;
     default:
       return state;

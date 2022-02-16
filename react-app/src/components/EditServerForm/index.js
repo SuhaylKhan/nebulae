@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
-import { editServer } from '../../store/server';
+import { deleteServer, editServer } from '../../store/server';
 
 function EditServerForm() {
   const dispatch = useDispatch();
@@ -38,6 +38,18 @@ function EditServerForm() {
     setErrors(['Please provide a name for your new Solar System']);
   }
 
+  const handleDelete = async () => {
+    setErrors([])
+    const data = await dispatch(deleteServer(serverId))
+
+    if (data === 'DELETE SUCCESSFUL') {
+      history.push(`/users/${user.id}/servers`);
+      return
+    } else if (data.errors) {
+      setErrors(data.errors)
+    };
+  }
+
   return (
     <>
       <h1>EDIT</h1>
@@ -56,6 +68,7 @@ function EditServerForm() {
           <button type='submit'>Update Server Name</button>
         </form>
       }
+      <button onClick={handleDelete}>DELETE</button>
     </>
   )
 }
