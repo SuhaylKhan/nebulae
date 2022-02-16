@@ -36,8 +36,13 @@ function ServerPanel({server}) {
     <>
       <button onClick={handleClick}>{server.name}</button>
       {showPanel &&
-        <div className='details-panel'>
-          <button onClick={handleEditClick}>EDIT</button>
+        <div>
+          <div>Server Details</div>
+          {user.id === server.admin_id &&
+            <div className='details-panel'>
+              <button onClick={handleEditClick}>EDIT</button>
+            </div>
+          }
         </div>
       }
     </>
