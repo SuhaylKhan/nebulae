@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import './HomePage.css'
 
 function HomePage() {
   const user = useSelector(state => state.session.user);
@@ -10,7 +11,7 @@ function HomePage() {
 
   return (
     <>
-      <h1>HOMEPAGE</h1>
+      <h1 id='home-page-title'>HOMEPAGE</h1>
     </>
   )
 }
