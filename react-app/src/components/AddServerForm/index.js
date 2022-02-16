@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as serverActions from '../../store/server';
 
-function Servers() {
+function AddServerForm() {
   const dispatch = useDispatch();
 
   const sessionUser = useSelector(state => state.session.user)
@@ -55,4 +55,4 @@ function Servers() {
   )
 }
 
-export default Servers;
+export default AddServerForm;
