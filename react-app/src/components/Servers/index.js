@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import ServerPanel from './ServerPanel';
 
 function Servers() {
   const servers = useSelector(state => state.servers);
@@ -7,11 +8,8 @@ function Servers() {
     <>
       <h1>User's Servers</h1>
       {Object.keys(servers).map(serverId => {
-        return (
-        <ul key={serverId}>
-          <li>{servers[serverId].name}</li>
-        </ul>
-      )
+        const server = servers[serverId]
+        return <ServerPanel key={server.id} server={server} />
       })}
     </>
   )
