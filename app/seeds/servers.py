@@ -18,9 +18,9 @@ def seed_servers():
   db.session.commit()
 
   users = db.session.query(User).all()
+  users[0].joined_servers.append(server3)
   users[1].joined_servers.append(server1)
   users[2].joined_servers.append(server1)
-  users[0].joined_servers.append(server2)
 
   db.session.commit()
 
