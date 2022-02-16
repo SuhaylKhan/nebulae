@@ -6,7 +6,7 @@ function HomePage() {
   const user = useSelector(state => state.session.user);
 
   if (user) {
-    return <Redirect to='/servers' />
+    return <Redirect to={`/users/${user.id}/servers`} />
   }
 
   return (
