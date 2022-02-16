@@ -27,7 +27,7 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/servers' />;
+    return <Redirect to={`/users/${user.id}/servers`} />;
   }
 
   return (
