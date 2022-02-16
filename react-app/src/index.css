@@ -1,1 +1,30 @@
 /* TODO Add site wide styles */
+:root {
+  --black1: #242124;
+  --black2: #232B2B;
+  --black3: #353839;
+
+  --white1: #FFDEAD;
+  --white2: #FAEBD7;
+  --white3: #FFFAF0;
+  --pinkWhite: #FFF0F5;
+
+  --main: #4C3F91;
+  --accent: #9145B6;
+  --accentLight: #B958A5;
+  --wildCard: #FF5677;
+}
+
+html {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  color: var(--pinkWhite);
+  height: 100vh;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background-color: var(--black3);
+  height: 100%;
+}

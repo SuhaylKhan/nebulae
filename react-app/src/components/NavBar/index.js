@@ -8,11 +8,11 @@ const NavBar = () => {
   const user = useSelector(state => state.session.user);
 
   return (
-    <nav>
-      <ul>
-        <li>
+    <nav id='nav-bar'>
+      <ul id='nav-bar-list'>
+        <li id='home-button' className='nav-bar-navlink'>
           <NavLink to='/' exact={true} activeClassName='active'>
-            Home
+            N E B U L A E
           </NavLink>
         </li>
         {user ?
@@ -20,13 +20,13 @@ const NavBar = () => {
             <LogoutButton />
           </li>
           :
-          <li>
-            <div>
+          <li id='login-signup'>
+            <div className='nav-bar-navlink login-signup'>
               <NavLink to='/login' exact={true} activeClassName='active'>
-                Login
+                Log in
               </NavLink>
             </div>
-            <div>
+            <div className='nav-bar-navlink login-signup'>
               <NavLink to='/sign-up' exact={true} activeClassName='active'>
                 Sign Up
               </NavLink>
