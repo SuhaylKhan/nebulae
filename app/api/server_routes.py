@@ -60,3 +60,11 @@ def delete_server(server_id):
   db.session.delete(server)
   db.session.commit()
   return {}
+
+@server_routes.route('/<int:server_id>/channels')
+def servers_channels(server_id):
+  """
+  Gets channels by server_id
+  """
+  server = Server.query.get(server_id)
+  return {'channels': [channel.to_dict() for channel in server.channels]}

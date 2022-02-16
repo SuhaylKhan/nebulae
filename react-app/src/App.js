@@ -7,9 +7,9 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import AddServerForm from './components/AddServerForm'
 import HomePage from './components/HomePage';
-import Servers from './components/Servers';
-import { authenticate } from './store/session';
 import EditServerForm from './components/EditServerForm';
+import Channels from './components/Channels';
+import { authenticate } from './store/session';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -38,16 +38,16 @@ function App() {
           <SignUpForm />
         </Route>
 
-        <ProtectedRoute path='/users/:id/servers' exact={true} >
-          <Servers />
-        </ProtectedRoute>
-
         <ProtectedRoute path='/servers/new' exact={true} >
           <AddServerForm />
         </ProtectedRoute>
 
         <ProtectedRoute path='/servers/:serverId/edit' exact={true} >
           <EditServerForm />
+        </ProtectedRoute>
+
+        <ProtectedRoute path='/servers/:serverId/channels' exact={true} >
+          <Channels />
         </ProtectedRoute>
 
         <Route path='/' exact={true} >

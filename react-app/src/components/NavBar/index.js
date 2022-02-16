@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
+import Servers from '../Servers';
 import './NavBar.css'
 
 const NavBar = () => {
@@ -34,6 +35,9 @@ const NavBar = () => {
           </li>
         }
       </ul>
+      {user &&
+        <Servers />
+      }
     </nav>
   );
 }
