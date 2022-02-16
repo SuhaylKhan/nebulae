@@ -16,6 +16,7 @@ function Servers() {
           >{server.name}</button>
         )
       })}
+      <button onClick={() => history.push('/servers/new')}>+</button>
     </>
   )
 }

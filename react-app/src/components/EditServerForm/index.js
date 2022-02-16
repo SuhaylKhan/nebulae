@@ -82,6 +82,7 @@ function EditServerForm() {
           <label>Enter a new name</label>
           <input
             type='text'
+            disabled={showConfirm ? true : false}
             placeholder={servers[serverId].name}
             value={serverName}
             onChange={e => setServerName(e.target.value)}
