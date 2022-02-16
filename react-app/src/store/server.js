@@ -47,7 +47,7 @@ export const createServer = newServer => async dispatch => {
 }
 
 export const loadServers = userId => async dispatch => {
-  const response = await fetch(`api/users/${userId}/servers`)
+  const response = await fetch(`/api/users/${userId}/servers`)
 
   if (response.ok) {
     const data = await response.json();
