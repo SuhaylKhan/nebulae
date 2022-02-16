@@ -1,15 +1,15 @@
 from app.models import db, Server, User
-from datetime import datetime
+from datetime import datetime, timezone
 
 def seed_servers():
   server1 = Server(
-    admin_id=1, name='Noisy Event', created_at=datetime(2022, 2, 14), updated_at=datetime.today()
+    admin_id=1, name='Noisy Event', created_at=datetime(2022, 2, 14), updated_at=datetime.now(timezone.utc)
   )
   server2 = Server(
-    admin_id=1, name='Vigorous Mood', created_at=datetime(2022, 2, 14), updated_at=datetime.today()
+    admin_id=1, name='Vigorous Mood', created_at=datetime(2022, 2, 14), updated_at=datetime.now(timezone.utc)
   )
   server3 = Server(
-    admin_id=2, name='Accurate Night', created_at=datetime(2022, 2, 14), updated_at=datetime.today()
+    admin_id=2, name='Accurate Night', created_at=datetime(2022, 2, 14), updated_at=datetime.now(timezone.utc)
   )
 
   db.session.add_all([
