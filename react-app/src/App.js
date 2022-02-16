@@ -9,6 +9,7 @@ import AddServerForm from './components/AddServerForm'
 import HomePage from './components/HomePage';
 import EditServerForm from './components/EditServerForm';
 import Channels from './components/Channels';
+import AddChannelForm from './components/AddChannelForm';
 import { authenticate } from './store/session';
 
 function App() {
@@ -48,6 +49,10 @@ function App() {
 
         <ProtectedRoute path='/servers/:serverId/channels' exact={true} >
           <Channels />
+        </ProtectedRoute>
+
+        <ProtectedRoute path='/channels/new' exact={true} >
+          <AddChannelForm />
         </ProtectedRoute>
 
         <Route path='/' exact={true} >

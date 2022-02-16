@@ -23,7 +23,6 @@ function AddServerForm() {
 
     if (serverName) {
       const data = await dispatch(serverActions.createServer(newServer));
-      console.log('new server data ===>', data)
 
       if (data.errors) {
         setErrors(data.errors);
@@ -41,7 +40,7 @@ function AddServerForm() {
 
   return (
     <>
-      <h1>SERVERS</h1>
+      <h1>Create New Server</h1>
       {errors.length === 0 ? null : errors.map((error, i) => (
         <div key={i}>{error}</div>
       ))}

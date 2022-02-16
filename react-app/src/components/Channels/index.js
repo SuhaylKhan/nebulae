@@ -10,6 +10,7 @@ function Channels() {
   const { serverId } = useParams();
   const servers = useSelector(state => state.servers);
   const channels = useSelector(state => state.channels);
+  const user = useSelector(state => state.session.user);
 
   useEffect(() => {
     (async () => await dispatch(loadChannels(serverId)))()
@@ -28,6 +29,16 @@ function Channels() {
           >{channel.name}</button>
         )
       })}
+      {user.id !== servers[serverId]?.admin_id ? null :
+        <button
+          onClick={() => {
+            history.push({
+              pathname: '/channels/new',
+              state: { serverId }
+            })
+          }}
+        >+</button>
+      }
     </>
   )
 }
