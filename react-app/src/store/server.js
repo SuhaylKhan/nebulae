@@ -1,10 +1,16 @@
 const ADD_SERVER = 'server/ADD_SERVER';
+const SET_SERVERS = 'server/SET_SERVERS';
 
 const initialState = {}
 
 const addServer = server => ({
   type: ADD_SERVER,
   payload: server
+})
+
+const setServers = servers => ({
+  type: SET_SERVERS,
+  payload: servers
 })
 
 export const createServer = newServer => async dispatch => {
@@ -35,11 +41,30 @@ export const createServer = newServer => async dispatch => {
   }
 }
 
+export const loadServers = userId => async dispatch => {
+  const response = await fetch(`api/users/${userId}/servers`)
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setServers(data.servers));
+    return;
+  }
+}
+
 export default function reducer(state = initialState, action) {
+  let newState = {...state}
   switch (action.type) {
     case ADD_SERVER:
-      const newState = {...state};
+      newState = {...state};
       newState[action.payload.id] = action.payload;
+      return newState;
+    case SET_SERVERS:
+      newState = action.payload.reduce((a, b) => {
+        return {
+          ...a,
+          [b.id]: b
+        }
+      }, {})
       return newState;
     default:
       return state;

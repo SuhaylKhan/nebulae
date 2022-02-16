@@ -17,3 +17,12 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/<int:id>/servers')
+@login_required
+def users_servers(id):
+    user = User.query.get(id)
+    admin_servers = user.admin_servers
+    joined_servers = user.joined_servers
+    users_servers = admin_servers + joined_servers
+    return { 'servers': [server.to_dict() for server in users_servers] }

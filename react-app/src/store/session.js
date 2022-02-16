@@ -1,3 +1,5 @@
+import { loadServers } from "./server";
+
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
@@ -26,6 +28,7 @@ export const authenticate = () => async (dispatch) => {
     }
 
     dispatch(setUser(data));
+    dispatch(loadServers(data.id));
   }
 }
 
@@ -45,6 +48,7 @@ export const login = (email, password) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
+    dispatch(loadServers(data.id));
     return null;
   } else if (response.status < 500) {
     const data = await response.json();
@@ -88,6 +92,7 @@ export const signUp = (firstName, lastName, username, email, password) => async 
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
+    dispatch(loadServers(data.id));
     return null;
   } else if (response.status < 500) {
     const data = await response.json();
