@@ -46,7 +46,7 @@ function App() {
           <AddServerForm />
         </ProtectedRoute>
 
-        <ProtectedRoute path='/servers/:id/edit' exact={true} >
+        <ProtectedRoute path='/servers/:serverId/edit' exact={true} >
           <EditServerForm />
         </ProtectedRoute>
 

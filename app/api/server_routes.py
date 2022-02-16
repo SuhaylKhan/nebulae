@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from datetime import datetime, timezone
-from app.forms import NewServerForm
+from app.forms import NewServerForm, EditServerForm
 from app.models import db, Server
 
 server_routes = Blueprint('server', __name__)
@@ -31,6 +31,22 @@ def create_server():
       updated_at=datetime.now(timezone.utc)
     )
     db.session.add(server)
+    db.session.commit()
+    return server.to_dict()
+  return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@server_routes.route('/<int:server_id>/edit', methods=['PUT'])
+def edit_server(server_id):
+  """
+  Edits an existing server.
+  """
+  data = request.json
+  form = EditServerForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+
+  if form.validate_on_submit():
+    server = Server.query.get(server_id)
+    server.name = data['name']
     db.session.commit()
     return server.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
