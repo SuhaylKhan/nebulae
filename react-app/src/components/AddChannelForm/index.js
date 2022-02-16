@@ -9,6 +9,7 @@ function AddChannelForm() {
   const location = useLocation();
 
   const [channelName, setChannelName] = useState('');
+  const [channelDescription, setChannelDescription] = useState('');
   const [errors, setErrors] = useState([]);
 
   const newChannel = async e => {
@@ -16,8 +17,9 @@ function AddChannelForm() {
     setErrors([]);
 
     const newChannel = {
+      serverId: location.state.serverId,
       name: channelName,
-      serverId: location.state.serverId
+      description: channelDescription
     }
 
     if (channelName) {
@@ -46,13 +48,24 @@ function AddChannelForm() {
         <div key={i}>{error}</div>
       ))}
       <form onSubmit={newChannel}>
-        <label htmlFor='name'>Channel Name</label>
-        <input
-          type='text'
-          name='name'
-          value={channelName}
-          onChange={e => setChannelName(e.target.value)}
-        />
+        <div>
+          <label htmlFor='name'>Channel Name</label>
+          <input
+            type='text'
+            name='name'
+            value={channelName}
+            onChange={e => setChannelName(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor='description'>Channel Description</label>
+          <textarea
+            name='description'
+            placeholder='Optional'
+            value={channelDescription}
+            onChange={e => setChannelDescription(e.target.value)}
+          />
+        </div>
         <button type='submit'>CREATE CHANNEL</button>
       </form>
     </>

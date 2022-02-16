@@ -29,10 +29,11 @@ export const createChannel = newChannel => async dispatch => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: {
+    body: JSON.stringify({
       server_id: newChannel.serverId,
-      name: newChannel.name
-    }
+      name: newChannel.name,
+      description: newChannel.description
+    })
   })
 
   if (response.ok) {
