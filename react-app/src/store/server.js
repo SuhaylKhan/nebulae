@@ -1,5 +1,6 @@
 const ADD_SERVER = 'server/ADD_SERVER';
 const SET_SERVERS = 'server/SET_SERVERS';
+const REMOVE_ALL = 'server/REMOVE_ALL';
 
 const initialState = {}
 
@@ -11,6 +12,10 @@ const addServer = server => ({
 const setServers = servers => ({
   type: SET_SERVERS,
   payload: servers
+})
+
+const removeAll = () => ({
+  type: REMOVE_ALL
 })
 
 export const createServer = newServer => async dispatch => {
@@ -51,6 +56,11 @@ export const loadServers = userId => async dispatch => {
   }
 }
 
+export const removeAllServers = () => async dispatch => {
+  dispatch(removeAll());
+  return;
+}
+
 export default function reducer(state = initialState, action) {
   let newState = {...state}
   switch (action.type) {
@@ -65,6 +75,9 @@ export default function reducer(state = initialState, action) {
           [b.id]: b
         }
       }, {})
+      return newState;
+    case REMOVE_ALL:
+      newState = {};
       return newState;
     default:
       return state;

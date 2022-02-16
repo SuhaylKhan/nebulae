@@ -1,4 +1,4 @@
-import { loadServers } from "./server";
+import { loadServers, removeAllServers } from "./server";
 
 // constants
 const SET_USER = 'session/SET_USER';
@@ -70,6 +70,7 @@ export const logout = () => async (dispatch) => {
 
   if (response.ok) {
     dispatch(removeUser());
+    dispatch(removeAllServers());
   }
 };
 
