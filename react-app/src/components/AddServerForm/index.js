@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import * as serverActions from '../../store/server';
 
 function AddServerForm() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const sessionUser = useSelector(state => state.session.user)
 
@@ -21,6 +23,7 @@ function AddServerForm() {
 
     if (serverName) {
       const data = await dispatch(serverActions.createServer(newServer));
+      console.log('new server data ===>', data)
 
       if (data.errors) {
         setErrors(data.errors);
@@ -29,6 +32,7 @@ function AddServerForm() {
 
       setErrors([]);
       setServerName('');
+      history.push(`/servers/${data.id}/channels`);
       return;
     }
 
