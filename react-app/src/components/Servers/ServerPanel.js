@@ -34,7 +34,7 @@ function ServerPanel({server}) {
 
   return (
     <>
-      <button onClick={handleClick}>{server.name}</button>
+      <button onClick={handleClick}>Details</button>
       {showPanel &&
         <div>
           <div>Server Details</div>
