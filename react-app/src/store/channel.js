@@ -1,10 +1,16 @@
-const SET_CHANNELS = 'channels/SET_SERVERS';
+const SET_CHANNELS = 'channels/SET_CHANNELS';
+const ADD_CHANNEL = 'channels/ADD_CHANNEL';
 
 const initialState = {}
 
 const setChannels = channels => ({
   type: SET_CHANNELS,
   payload: channels
+})
+
+const addChannel = channel => ({
+  type: ADD_CHANNEL,
+  payload: channel
 })
 
 export const loadChannels = serverId => async dispatch => {
@@ -14,6 +20,34 @@ export const loadChannels = serverId => async dispatch => {
     const data = await response.json();
     dispatch(setChannels(data.channels));
     return;
+  }
+}
+
+export const createChannel = newChannel => async dispatch => {
+  const response = await fetch('/api/channels/new', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: {
+      server_id: newChannel.serverId,
+      name: newChannel.name
+    }
+  })
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(addChannel(data));
+    return data;
+
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data;
+    }
+
+  } else {
+    return { errors: ['An error occurred. Please try again.']}
   }
 }
 
