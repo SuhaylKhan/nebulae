@@ -1,7 +1,9 @@
 import { useSelector } from 'react-redux';
-import ServerPanel from './ServerPanel';
+import { useHistory } from 'react-router-dom';
 
 function Servers() {
+  const history = useHistory();
+
   const servers = useSelector(state => state.servers);
 
   return (
@@ -9,7 +11,12 @@ function Servers() {
       <h1>User's Servers</h1>
       {Object.keys(servers).map(serverId => {
         const server = servers[serverId]
-        return <ServerPanel key={server.id} server={server} />
+        return (
+          <button
+            key={server.id}
+            onClick={() => history.push(`/servers/${server.id}/channels`)}
+          >{server.name}</button>
+        )
       })}
     </>
   )
