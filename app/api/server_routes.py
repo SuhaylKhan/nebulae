@@ -50,3 +50,13 @@ def edit_server(server_id):
     db.session.commit()
     return server.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@server_routes.route('/<int:server_id>/delete', methods=['DELETE'])
+def delete_server(server_id):
+  """
+  Deletes an existing server.
+  """
+  server = Server.query.get(server_id)
+  db.session.delete(server)
+  db.session.commit()
+  return {}

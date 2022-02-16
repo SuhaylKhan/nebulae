@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
-import { editServer } from '../../store/server';
+import { deleteServer, editServer } from '../../store/server';
 
 function EditServerForm() {
   const dispatch = useDispatch();
@@ -12,10 +12,26 @@ function EditServerForm() {
 
   const [serverName, setServerName] = useState('');
   const [errors, setErrors] = useState([]);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   useEffect(() => {
     if (servers[serverId]) setServerName(servers[serverId].name);
   }, [serverId, servers])
+
+  useEffect(() => {
+    if (!user) setShowConfirm(false);
+    if (!showConfirm) return;
+
+    const closeMenu = e => {
+      if (e.target.className === 'confirm-delete'
+        || e.target.parentNode.className === 'confirm-delete') return;
+      setShowConfirm(false);
+    }
+
+    document.addEventListener('click', closeMenu);
+
+    return () => document.removeEventListener('click', closeMenu);
+  }, [showConfirm, user])
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -38,6 +54,23 @@ function EditServerForm() {
     setErrors(['Please provide a name for your new Solar System']);
   }
 
+  const handleDelete = async () => {
+    setErrors([])
+    const data = await dispatch(deleteServer(serverId))
+
+    if (data === 'DELETE SUCCESSFUL') {
+      history.push(`/users/${user.id}/servers`);
+      return
+    } else if (data.errors) {
+      setErrors(data.errors)
+    };
+  }
+
+  const handleClick = () => {
+    if (showConfirm) setShowConfirm(false);
+    else setShowConfirm(true);
+  }
+
   return (
     <>
       <h1>EDIT</h1>
@@ -53,8 +86,22 @@ function EditServerForm() {
             value={serverName}
             onChange={e => setServerName(e.target.value)}
           />
-          <button type='submit'>Update Server Name</button>
+          <button
+            type='submit'
+            disabled={showConfirm ? true : false}
+          >Update Server Name</button>
         </form>
+      }
+      <button
+        onClick={handleClick}
+        disabled={showConfirm ? true : false}
+      >DELETE</button>
+      {showConfirm &&
+        <div>
+          <div>Are you sure you want to delete your server?</div>
+          <button onClick={handleDelete}>Yes</button>
+          <button onClick={handleClick}>No</button>
+        </div>
       }
     </>
   )
