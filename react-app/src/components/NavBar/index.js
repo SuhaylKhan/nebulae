@@ -16,7 +16,7 @@ const NavBar = () => {
           </NavLink>
         </li>
         {user ?
-          <li>
+          <li id='logout'>
             <LogoutButton />
           </li>
           :
