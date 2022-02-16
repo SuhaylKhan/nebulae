@@ -9,6 +9,7 @@ import AddServerForm from './components/AddServerForm'
 import HomePage from './components/HomePage';
 import Servers from './components/Servers';
 import { authenticate } from './store/session';
+import EditServerForm from './components/EditServerForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -43,6 +44,10 @@ function App() {
 
         <ProtectedRoute path='/servers/new' exact={true} >
           <AddServerForm />
+        </ProtectedRoute>
+
+        <ProtectedRoute path='/servers/:serverId/edit' exact={true} >
+          <EditServerForm />
         </ProtectedRoute>
 
         <Route path='/' exact={true} >

@@ -17,5 +17,6 @@ class Server(db.Model):
   def to_dict(self):
     return {
       'id': self.id,
+      'admin_id': self.admin_id,
       'name': self.name
     }
