@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField
+from wtforms import StringField, DateTimeField
 from wtforms.validators import DataRequired, ValidationError
 
 def name_too_long(form, field):
@@ -12,7 +12,6 @@ def description_too_long(form, field):
   if len(description) > 2000:
     raise ValidationError('Descriptions names must less than 2000 characters')
 
-class NewChannelForm(FlaskForm):
-  server_id = IntegerField('server_id', validators=[DataRequired()])
+class EditChannelForm(FlaskForm):
   name = StringField('name', validators=[DataRequired(), name_too_long])
   description = StringField('description', validators=[description_too_long])

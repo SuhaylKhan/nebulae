@@ -73,7 +73,7 @@ function EditServerForm() {
 
   return (
     <>
-      <h1>EDIT</h1>
+      <h1>EDIT SERVER</h1>
       {errors.length === 0 ? null : errors.map((error, i) => (
         <div key={i}>{error}</div>
       ))}
