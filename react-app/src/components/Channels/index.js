@@ -26,10 +26,15 @@ function Channels() {
         {Object.keys(channels).map(channelId => {
           const channel = channels[channelId];
           return (
-            <button
-              key={channelId}
-              onClick={() => setCurrChannelId(channelId)}
-            >{channel.name}</button>
+            <div>
+              <button
+                key={channelId}
+                onClick={() => setCurrChannelId(channelId)}
+              >{channel.name}</button>
+              {currChannelId === channelId && user.id === servers[serverId]?.admin_id &&
+                <button>edit</button>
+              }
+            </div>
           )
         })}
         {user.id !== servers[serverId]?.admin_id ? null :
@@ -46,7 +51,11 @@ function Channels() {
       <div>
         {currChannelId && channels[currChannelId] &&
           <>
-            CHANNEL DETAILS for {channels[currChannelId].name}
+            <h2>{channels[currChannelId].name}</h2>
+            <div>
+            <h3>Description</h3>
+            <p>{channels[currChannelId].description}</p>
+            </div>
           </>
         }
       </div>
