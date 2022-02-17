@@ -26,13 +26,15 @@ function Channels() {
         {Object.keys(channels).map(channelId => {
           const channel = channels[channelId];
           return (
-            <div>
+            <div key={channelId}>
               <button
-                key={channelId}
                 onClick={() => setCurrChannelId(channelId)}
               >{channel.name}</button>
               {currChannelId === channelId && user.id === servers[serverId]?.admin_id &&
-                <button>edit</button>
+                <button onClick={() => history.push({
+                  pathname: `/channels/${channelId}/edit`,
+                  state: { serverId }
+                })}>edit</button>
               }
             </div>
           )
@@ -53,8 +55,8 @@ function Channels() {
           <>
             <h2>{channels[currChannelId].name}</h2>
             <div>
-            <h3>Description</h3>
-            <p>{channels[currChannelId].description}</p>
+              <h3>Description</h3>
+              <p>{channels[currChannelId].description}</p>
             </div>
           </>
         }

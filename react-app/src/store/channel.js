@@ -1,5 +1,6 @@
 const SET_CHANNELS = 'channels/SET_CHANNELS';
 const ADD_CHANNEL = 'channels/ADD_CHANNEL';
+const UPDATE_CHANNEL = 'channels/UPDATE_CHANNEL';
 
 const initialState = {}
 
@@ -10,6 +11,11 @@ const setChannels = channels => ({
 
 const addChannel = channel => ({
   type: ADD_CHANNEL,
+  payload: channel
+})
+
+const updateChannel = channel => ({
+  type: UPDATE_CHANNEL,
   payload: channel
 })
 
@@ -47,6 +53,33 @@ export const createChannel = newChannel => async dispatch => {
       return data;
     }
 
+  } else {
+    return { errors: ['An error occurred. Please try again.']}
+  }
+}
+
+export const editChannel = channel => async dispatch => {
+  const response = await fetch(`/api/channels/${channel.channelId}/edit`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      channel_id: channel.channelId,
+      name: channel.channelName,
+      description: channel.channelDescription
+    })
+  })
+
+  if (response.ok) {
+    const data = await response.json()
+    dispatch(updateChannel(data));
+    return data;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data;
+    }
   } else {
     return { errors: ['An error occurred. Please try again.']}
   }

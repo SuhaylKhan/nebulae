@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from datetime import datetime, timezone
-from app.forms import NewChannelForm
+from app.forms import NewChannelForm, EditChannelForm
 from app.models import db, Channel
 
 channel_routes = Blueprint('channel', __name__)
@@ -32,6 +32,23 @@ def create_channel():
       updated_at=datetime.now(timezone.utc)
     )
     db.session.add(channel)
+    db.session.commit()
+    return channel.to_dict()
+  return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@channel_routes.route('/<int:channel_id>/edit', methods=['PUT'])
+def edit_channel(channel_id):
+  """
+  Edits an existing channel.
+  """
+  data = request.json
+  form = EditChannelForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+
+  if form.validate_on_submit():
+    channel = Channel.query.get(channel_id)
+    channel.name = data['name']
+    channel.description = data['description']
     db.session.commit()
     return channel.to_dict()
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
