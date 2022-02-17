@@ -13,8 +13,9 @@ function ServerPanel({server}) {
     if (!showPanel) return;
 
     const closeMenu = e => {
+      console.log(e.target.parentNode)
       if (e.target.className === 'details-panel'
-        || e.target.parentNode.className === 'details-panel') return;
+        || e.target.parentNode?.className === 'details-panel') return;
       setShowPanel(false);
     }
 
