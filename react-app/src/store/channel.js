@@ -1,6 +1,7 @@
 const SET_CHANNELS = 'channels/SET_CHANNELS';
 const ADD_CHANNEL = 'channels/ADD_CHANNEL';
 const UPDATE_CHANNEL = 'channels/UPDATE_CHANNEL';
+const REMOVE_ONE = 'channels/REMOVE_ONE';
 
 const initialState = {}
 
@@ -17,6 +18,11 @@ const addChannel = channel => ({
 const updateChannel = channel => ({
   type: UPDATE_CHANNEL,
   payload: channel
+})
+
+const removeOne = channelId => ({
+  type: REMOVE_ONE,
+  payload: channelId
 })
 
 export const loadChannels = serverId => async dispatch => {
@@ -85,6 +91,19 @@ export const editChannel = channel => async dispatch => {
   }
 }
 
+export const deleteChannel = channelId => async dispatch => {
+  const response = await fetch(`/api/channels/${channelId}/delete`, {
+    method: 'DELETE'
+  })
+
+  if (response.ok) {
+    dispatch(removeOne(channelId))
+    return 'DELETE SUCCESSFUL';
+  } else {
+    return { errors: ['An error occurred. Please try again.']}
+  }
+}
+
 export default function reducer(state = initialState, action) {
   let newState = {...state};
   switch (action.type) {
@@ -95,6 +114,15 @@ export default function reducer(state = initialState, action) {
           [b.id]: b
         }
       }, {})
+      return newState;
+    case ADD_CHANNEL:
+      newState[action.payload.id] = action.payload;
+      return newState;
+    case UPDATE_CHANNEL:
+      newState[action.payload.id] = action.payload;
+      return newState;
+    case REMOVE_ONE:
+      delete newState[action.payload];
       return newState;
     default:
       return state;

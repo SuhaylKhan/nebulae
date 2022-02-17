@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
-import { editChannel, loadChannels } from '../../store/channel';
+import { editChannel, loadChannels, deleteChannel } from '../../store/channel';
 
 function EditChannelForm() {
   const dispatch = useDispatch();
@@ -52,6 +52,25 @@ function EditChannelForm() {
       })
       return;
     }
+
+    setErrors(['Please provide a name for your new Planet']);
+  }
+
+  const handleClick = () => {
+    if (showConfirm) setShowConfirm(false);
+    else setShowConfirm(true);
+  }
+
+  const handleDelete = async () => {
+    setErrors([])
+    const data = await dispatch(deleteChannel(channelId))
+
+    if (data === 'DELETE SUCCESSFUL') {
+      history.push(`/servers/${location.state?.serverId}/channels`);
+      return
+    } else if (data.errors) {
+      setErrors(data.errors)
+    };
   }
 
   return (
@@ -81,8 +100,22 @@ function EditChannelForm() {
               onChange={e => setChannelDescription(e.target.value)}
             ></textarea>
           </div>
-          <button type='submit'>Update Channel</button>
+          <button
+            type='submit'
+            disabled={showConfirm ? true : false}
+          >Update Channel</button>
         </form>
+      }
+      <button
+        onClick={handleClick}
+        disabled={showConfirm ? true : false}
+      >DELETE</button>
+      {showConfirm &&
+        <div>
+          <div>Are you sure you want to delete this channel?</div>
+          <button onClick={handleDelete}>Yes</button>
+          <button onClick={handleClick}>No</button>
+        </div>
       }
     </>
   )
