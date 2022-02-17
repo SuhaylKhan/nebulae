@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { loadChannels } from '../../store/channel';
@@ -11,6 +11,7 @@ function Channels() {
   const servers = useSelector(state => state.servers);
   const channels = useSelector(state => state.channels);
   const user = useSelector(state => state.session.user);
+  const [currChannelId, setCurrChannelId] = useState('');
 
   useEffect(() => {
     (async () => await dispatch(loadChannels(serverId)))()
@@ -18,27 +19,36 @@ function Channels() {
 
   return (
     <>
-      <h1>{servers[serverId]?.name}</h1>
-      <ServerPanel server={servers[serverId]} />
-      {Object.keys(channels).map(channelId => {
-        const channel = channels[channelId];
-        return (
+      <div>
+        <h1>{servers[serverId]?.name}</h1>
+        <ServerPanel server={servers[serverId]} />
+        {Object.keys(channels).map(channelId => {
+          const channel = channels[channelId];
+          return (
+            <button
+              key={channelId}
+              onClick={() => setCurrChannelId(channelId)}
+            >{channel.name}</button>
+          )
+        })}
+        {user.id !== servers[serverId]?.admin_id ? null :
           <button
-            key={channelId}
-            onClick={() => history.push(`/channels/${channelId}`)}
-          >{channel.name}</button>
-        )
-      })}
-      {user.id !== servers[serverId]?.admin_id ? null :
-        <button
-          onClick={() => {
-            history.push({
-              pathname: '/channels/new',
-              state: { serverId }
-            })
-          }}
-        >+</button>
-      }
+            onClick={() => {
+              history.push({
+                pathname: '/channels/new',
+                state: { serverId }
+              })
+            }}
+          >+</button>
+        }
+      </div>
+      <div>
+        {currChannelId && channels[currChannelId] &&
+          <>
+            CHANNEL DETAILS for {channels[currChannelId].name}
+          </>
+        }
+      </div>
     </>
   )
 }
