@@ -47,7 +47,7 @@ function EditServerForm() {
 
       setErrors([]);
       setServerName('');
-      history.push(`/users/${user.id}/servers`);
+      history.push(`/servers/${serverId}/channels`);
       return;
     }
 
