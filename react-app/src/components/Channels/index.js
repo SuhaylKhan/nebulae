@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { loadChannels } from '../../store/channel';
 import ServerPanel from '../Servers/ServerPanel';
 
 function Channels() {
-  const history = useHistory();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const history = useHistory();
   const { serverId } = useParams();
   const servers = useSelector(state => state.servers);
   const channels = useSelector(state => state.channels);
   const user = useSelector(state => state.session.user);
-  const [currChannelId, setCurrChannelId] = useState('');
+  const [currChannelId, setCurrChannelId] = useState(location.state?.channelId || '');
 
   useEffect(() => {
     (async () => await dispatch(loadChannels(serverId)))()
