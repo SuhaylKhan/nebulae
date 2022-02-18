@@ -9,6 +9,7 @@ function EditChannelForm() {
   const location = useLocation();
   const { channelId } = useParams();
   const channels = useSelector(state => state.channels);
+  const user = useSelector(state => state.session.user);
   const [errors, setErrors] = useState([]);
   const [showConfirm, setShowConfirm] = useState(false);
   const [channelName, setChannelName] = useState('');
@@ -24,6 +25,21 @@ function EditChannelForm() {
     if (channels[channelId]?.name) setChannelName(channels[channelId]?.name)
     if (channels[channelId]?.description) setChannelDescription(channels[channelId]?.description)
   }, [channels, channelId])
+
+  useEffect(() => {
+    if (!user) setShowConfirm(false);
+    if (!showConfirm) return;
+
+    const closeMenu = e => {
+      if (e.target.className === 'confirm-delete'
+        || e.target.parentNode.className === 'confirm-delete') return;
+      setShowConfirm(false);
+    }
+
+    document.addEventListener('click', closeMenu);
+
+    return () => document.removeEventListener('click', closeMenu);
+  }, [showConfirm, user])
 
   const handleEdit = async e => {
     e.preventDefault();
