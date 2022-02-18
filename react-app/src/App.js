@@ -12,10 +12,13 @@ import Channels from './components/Channels';
 import AddChannelForm from './components/AddChannelForm';
 import { authenticate } from './store/session';
 import EditChannelForm from './components/EditChannelForm';
+import { useServerContext } from './context/ServerContext';
+import { loadChannels } from './store/channel';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const { serverId } = useServerContext();
 
   useEffect(() => {
     (async() => {
@@ -23,6 +26,14 @@ function App() {
       setLoaded(true);
     })();
   }, [dispatch]);
+
+  useEffect(() => {
+    if (serverId) {
+      (async() => {
+        await dispatch(loadChannels(serverId));
+      })();
+    }
+  }, [dispatch, serverId]);
 
   if (!loaded) {
     return null;

@@ -1,9 +1,11 @@
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { useServerContext } from '../../context/ServerContext';
 
 function Servers() {
   const history = useHistory();
   const servers = useSelector(state => state.servers);
+  const { setServerId } = useServerContext();
 
   return (
     <>
@@ -12,7 +14,10 @@ function Servers() {
         return (
           <button
             key={server.id}
-            onClick={() => history.push(`/servers/${server.id}/channels`)}
+            onClick={() => {
+              setServerId(server.id);
+              history.push(`/servers/${server.id}/channels`);
+            }}
           >{server.name}</button>
         )
       })}
