@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faGithubSquare } from '@fortawesome/free-brands-svg-icons';
 import './Footer.css';
@@ -32,6 +33,19 @@ function Footer() {
               <div id='footer-copyright'>Copyright © 2022 Nebulae by Suhayl Khan</div>
             </div>
           </div>
+          <div id='footer-techs'>
+            <div className='techs-title'>Technologies</div>
+            <ul className='techs-list'>
+              <li>JavaScript</li>
+              <li>ReactJS</li>
+              <li>NodeJS</li>
+              <li>HTML5</li>
+              <li>CSS3</li>
+              <li>Python</li>
+              <li>Flask</li>
+              <li>SQLAlchemy</li>
+            </ul>
+          </div>
           <div id='about-credit'>
             <a
               href='https://github.com/SuhaylKhan/nebulae'
@@ -40,22 +54,17 @@ function Footer() {
             >
               About
             </a>
-          </div>
-          <div id='footer-techs'>
-            <div className='techs-title'>Technologies</div>
-            <ul className='techs-list'>
-              <li>JavaScript</li>
-              <li>ReactJs</li>
-              <li>NodeJs</li>
-              <li>HTML5</li>
-              <li>CSS3</li>
-              <li>Python</li>
-              <li>Flask</li>
-              <li>SQLAlchemy</li>
-            </ul>
+            <p>
+              Nebulae is a website inspired by Discord, and my love for space,
+              that utilizes primarily ReactJS for the frontend and Flask for the backend.
+            </p>
           </div>
           <div>
-            SIGN UP
+            <div id='footer-signup' className='nav-bar-navlink login-signup'>
+              <NavLink to='/sign-up' exact={true} activeClassName='active'>
+                Sign Up
+              </NavLink>
+            </div>
           </div>
         </div>
       </div>

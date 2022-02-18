@@ -55,7 +55,7 @@
 }
 
 .login-signup > *:hover {
-  color: var(--black2);
+  color: var(--wildCard);
   box-shadow: 1px 2px 10px var(--black1);
 }
 

@@ -4,11 +4,11 @@
 }
 
 #footer-inner-container {
-  max-width: 75%;
+  max-width: 65%;
   margin: 0 auto;
   padding: 50px 0;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
 }
 
 .footer-div-1 > div {
@@ -56,6 +56,12 @@
   color: var(--wildCard);
 }
 
+#about-credit > p {
+  font-size: 13px;
+  font-style: italic;
+  line-height: 23px;
+}
+
 .techs-title {
   font-style: italic;
   padding-bottom: 15px;
@@ -71,4 +77,12 @@
   font-size: 13px;
   font-style: italic;
   margin-bottom: 10px;
+}
+
+#footer-signup {
+  text-align: end;
+}
+
+#footer-signup > a {
+  margin: 0;
 }
