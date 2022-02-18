@@ -14,6 +14,7 @@ import { authenticate } from './store/session';
 import EditChannelForm from './components/EditChannelForm';
 import { useServerContext } from './context/ServerContext';
 import { loadChannels } from './store/channel';
+import Footer from './components/Footer';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -73,6 +74,7 @@ function App() {
 
         <Route path='/' exact={true} >
           <HomePage />
+          <Footer />
         </Route>
       </Switch>
     </BrowserRouter>

@@ -1,11 +1,13 @@
 #nav-bar {
   margin: 0 auto;
-  max-width: 75%;
+  padding: 20px auto;
+  background-color: var(--black3);
 }
 
 #nav-bar-list {
-  margin: 0;
-  padding: 30px 0;
+  margin: 0 auto;
+  max-width: 75%;
+  padding: 50px 0;
   display: grid;
   grid-template-columns: 3fr 5fr 3fr;
   list-style: none;
@@ -15,11 +17,6 @@
   display: flex;
   justify-content: center;
 }
-
-/* #home-button {
-  display: flex;
-  justify-content: center;
-} */
 
 #home-button > * {
   margin: 0 auto;
