@@ -1,0 +1,88 @@
+#footer-container {
+  margin: 0;
+  background-color: var(--black3);
+}
+
+#footer-inner-container {
+  max-width: 65%;
+  margin: 0 auto;
+  padding: 50px 0;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+}
+
+.footer-div-1 > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.footer-tagline > div {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 25px;
+  color: var(--pinkWhite);
+}
+
+.footer-tagline > div:nth-child(2) {
+  color: var(--wildCard);
+}
+
+.footer-icons > a > svg {
+  margin: 30px 0;
+  margin-right: 20px;
+  font-size: 25px;
+  transition: 0.2s;
+  color: var(--pinkWhite);
+}
+
+.footer-icons > a > svg:hover {
+  cursor: pointer;
+  color: var(--wildCard);
+}
+
+#footer-copyright {
+  font-size: 12px;
+}
+
+#about-credit > a {
+  text-decoration: none;
+  font-style: italic;
+  color: var(--pinkWhite);
+  transition: 0.2s;
+}
+
+#about-credit > a:hover {
+  cursor: pointer;
+  color: var(--wildCard);
+}
+
+#about-credit > p {
+  font-size: 13px;
+  font-style: italic;
+  line-height: 23px;
+}
+
+.techs-title {
+  font-style: italic;
+  padding-bottom: 15px;
+}
+
+.techs-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.techs-list > * {
+  font-size: 13px;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+#footer-signup {
+  text-align: end;
+}
+
+#footer-signup > a {
+  margin: 0;
+}

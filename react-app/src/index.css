@@ -4,6 +4,8 @@
   --black2: #232B2B;
   --black3: #353839;
 
+  --outerspace: #414A4C;
+
   --white1: #FFDEAD;
   --white2: #FAEBD7;
   --white3: #FFFAF0;
@@ -25,6 +27,7 @@ html {
 body {
   padding: 0;
   margin: 0;
-  background-color: var(--black3);
   height: 100%;
+  min-height: 100%;
+  background-color: var(--outerspace);
 }
