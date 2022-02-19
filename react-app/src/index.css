@@ -18,7 +18,8 @@
 }
 
 html {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+  font-family: 'Poppins', sans-serif;
   font-size: 15px;
   color: var(--pinkWhite);
   height: 100vh;

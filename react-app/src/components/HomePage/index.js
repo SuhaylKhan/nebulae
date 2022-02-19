@@ -11,7 +11,31 @@ function HomePage() {
 
   return (
     <>
-      <h1 id='home-page-title'>HOMEPAGE</h1>
+      <div className='home-img-container'>
+        <div>
+          SPACE IS EMPTY.
+        </div>
+        <div>
+          It can get lonely travelling through the vastness of space alone.
+        </div>
+      </div>
+      <div className='home-containers-2'>
+        <div>
+          MAKE IT LESS SO.
+        </div>
+        <div>
+          Create a Solar System and fill it with Planets that suits your needs.
+          Invite your friends to fill the emptiness of space.
+        </div>
+      </div>
+      <div className='home-containers-1'>
+        <div>
+          CREATE GALAXY-SIZED COMMUNITIES
+        </div>
+        <div>
+          With Nebulae it's easy to start and grow your community.
+        </div>
+      </div>
     </>
   )
 }
