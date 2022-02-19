@@ -11,7 +11,21 @@ function HomePage() {
 
   return (
     <>
-      <h1 id='home-page-title'>HOMEPAGE</h1>
+      <div className='home-img-container'>
+        HOMEPAGE AND WHATNOT
+      </div>
+      <div className='home-containers-2'>
+        INFO USE MY SITE PLEASE
+      </div>
+      <div className='home-containers-1'>
+        INFO USE MY SITE PLEASE
+      </div>
+      <div className='home-containers-2'>
+        INFO USE MY SITE PLEASE
+      </div>
+      <div className='home-containers-1'>
+        INFO USE MY SITE PLEASE
+      </div>
     </>
   )
 }

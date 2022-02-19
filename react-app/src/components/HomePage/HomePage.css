@@ -1,3 +1,21 @@
-#home-page-title {
-  text-align: center;
+#home-img {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.home-img-container {
+  height: 50vh;
+  background-image: url('../../images/nebulae-home-1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.home-containers-1 {
+  height: 50vh;
+  background-color: var(--black3);
+}
+
+.home-containers-2 {
+  height: 50vh;
+  background-color: var(--outerspace);
 }
