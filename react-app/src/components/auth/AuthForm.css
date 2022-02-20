@@ -1,0 +1,66 @@
+.auth-form-container {
+  display: flex;
+  justify-content: center;
+  margin: 25vh 0;
+}
+
+.auth-form-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 35px;
+  background-color: var(--black1);
+  border-radius: 10px;
+}
+
+.auth-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-right: 35px;
+}
+
+.auth-text-container > *:first-child {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.auth-text-container > div > a {
+  color: var(--wildCard);
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.auth-input-container {
+  display: grid;
+  grid-template-rows: 0.75fr 1fr;
+  margin-bottom: 20px;
+}
+
+.auth-input-container > input {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--black3);
+  border: 1px solid var(--outerspace);
+  color: var(--pinkWhite);
+}
+
+.auth-input-container > input:focus-visible {
+  outline: 2px solid var(--wildCard);
+}
+
+.auth-button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background: var(--main);
+  color: var(--pinkWhite);
+  transition: 0.2s;
+}
+
+.auth-button:hover {
+  cursor: pointer;
+  color: var(--wildCard);
+}

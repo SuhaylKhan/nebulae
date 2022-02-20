@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import { login } from '../../store/session';
+import './AuthForm.css';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -31,34 +32,48 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+    <div className='auth-form-container'>
+      <div className='auth-form-inner'>
+        <div className='auth-text-container'>
+          <div>Welcome back!</div>
+          <div>
+            Need an account?
+            <NavLink to='/sign-up' exact={true} activeClassName='active'>
+              Sign up
+            </NavLink>
+          </div>
+        </div>
+        <form onSubmit={onLogin}>
+          <div>
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div>
+          <div className='auth-input-container'>
+            <label htmlFor='email'>EMAIL</label>
+            <input
+              name='email'
+              type='text'
+              value={email}
+              onChange={updateEmail}
+            />
+          </div>
+          <div className='auth-input-container'>
+            <label htmlFor='password'>PASSWORD</label>
+            <input
+              name='password'
+              type='password'
+              value={password}
+              onChange={updatePassword}
+            />
+          </div>
+          <button
+            className='auth-button'
+            type='submit'
+          >Login</button>
+        </form>
       </div>
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input
-          name='email'
-          type='text'
-          placeholder='Email'
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div>
-        <label htmlFor='password'>Password</label>
-        <input
-          name='password'
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type='submit'>Login</button>
-      </div>
-    </form>
+    </div>
   );
 };
 

@@ -62,7 +62,7 @@ function Footer() {
           <div>
             <div id='footer-signup' className='nav-bar-navlink login-signup'>
               <NavLink to='/sign-up' exact={true} activeClassName='active'>
-                Sign Up
+                Sign up
               </NavLink>
             </div>
           </div>
