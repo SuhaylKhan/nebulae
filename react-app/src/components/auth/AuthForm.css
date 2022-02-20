@@ -65,7 +65,7 @@
   color: var(--wildCard);
 }
 
-.auth-error-container {
+.auth-error {
   font-size: 13px;
   font-style: italic;
   color: var(--accentLight);
