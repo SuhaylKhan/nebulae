@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, NavLink } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import { login, signUp } from '../../store/session';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -60,11 +60,24 @@ const SignUpForm = () => {
     return <Redirect to={`/users/${user.id}/servers`} />;
   }
 
+  const handleDemo = async () => {
+    const demoEmail = 'demo@aa.io';
+    const demoPassword = 'password';
+    const data = await dispatch(login(demoEmail, demoPassword));
+    if (data) {
+      setErrors(data);
+    }
+  }
+
   return (
     <div className='auth-form-container'>
       <div className='auth-form-inner'>
         <div className='auth-text-container'>
           <div>Create an account</div>
+          <div>
+            Not conviced?
+            <button onClick={handleDemo}>Demo</button>
+          </div>
           <div>
             Already have an account?
             <NavLink to='/login' exact={true} activeClassName='active'>

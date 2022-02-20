@@ -26,6 +26,18 @@
   margin-bottom: 10px;
 }
 
+.auth-text-container > div > button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: var(--wildCard);
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .auth-text-container > div > a {
   color: var(--wildCard);
   text-decoration: none;
