@@ -1,7 +1,7 @@
 .auth-form-container {
   display: flex;
   justify-content: center;
-  margin: 25vh 0;
+  margin: 10vh 0;
 }
 
 .auth-form-inner {
