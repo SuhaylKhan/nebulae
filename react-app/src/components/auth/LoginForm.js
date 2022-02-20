@@ -44,11 +44,11 @@ const LoginForm = () => {
           </div>
         </div>
         <form onSubmit={onLogin}>
-          <div>
-            {errors.map((error, ind) => (
-              <div key={ind}>{error}</div>
-            ))}
-          </div>
+          {errors.map((error, ind) => (
+            <div className='auth-error-container'>
+              <div key={ind} className='auth-error'>{error}</div>
+            </div>
+          ))}
           <div className='auth-input-container'>
             <label htmlFor='email'>EMAIL</label>
             <input

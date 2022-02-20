@@ -6,7 +6,7 @@
 
 .auth-form-inner {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.75fr;
   padding: 35px;
   background-color: var(--black1);
   border-radius: 10px;
@@ -63,4 +63,10 @@
 .auth-button:hover {
   cursor: pointer;
   color: var(--wildCard);
+}
+
+.auth-error-container {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--accentLight);
 }
