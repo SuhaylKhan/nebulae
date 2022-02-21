@@ -1,7 +1,29 @@
-.auth-form-container {
+.auth-form-outer {
+  background: url('../../images/auth-background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  margin: 10vh 0;
+  align-items: center;
+}
+
+.auth-form-home-link {
+  margin-bottom: 30px;
+}
+
+.auth-form-home-link > a {
+  color: var(--pinkWhite);
+  text-decoration: none;
+  font-family: 'Open Sans', sans-serif;
+  transition: 0.2s;
+  font-size: 30px;
+}
+
+.auth-form-home-link > a:hover {
+  color: var(--wildCard);
 }
 
 .auth-form-inner {

@@ -5,7 +5,7 @@
 
 .home-img-container {
   height: 50vh;
-  background-image: url('../../images/nebulae-home-1.jpg');
+  background-image: url('../../images/home-background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }
