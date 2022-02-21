@@ -57,3 +57,27 @@
 #logout {
   grid-column-start: 3;
 }
+
+#servers-container {
+  margin: 0 auto;
+  max-width: 75%;
+  padding-bottom: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  /* overflow-x: scroll; */
+}
+
+/* #servers-container > * {
+  text-decoration: none;
+  margin: 0 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+
+  color: var(--pinkWhite);
+  transition: 0.2s;
+}
+
+#servers-container > *:hover {
+  color: var(--wildCard);
+} */
