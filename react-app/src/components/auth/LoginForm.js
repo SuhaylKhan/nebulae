@@ -32,41 +32,43 @@ const LoginForm = () => {
   }
 
   return (
-    <div className='auth-form-container'>
-      <div className='auth-form-inner'>
-        <div className='auth-text-container'>
-          <div>Welcome back!</div>
-          <div>
-            Need an account?
-            <NavLink to='/sign-up' exact={true} activeClassName='active'>
-              Sign up
-            </NavLink>
+    <div className='auth-form-outer'>
+      <div className='auth-form-container'>
+        <div className='auth-form-inner'>
+          <div className='auth-text-container'>
+            <div>Welcome back!</div>
+            <div>
+              Need an account?
+              <NavLink to='/sign-up' exact={true} activeClassName='active'>
+                Sign up
+              </NavLink>
+            </div>
           </div>
+          <form onSubmit={onLogin}>
+            {errors.map((error, ind) => (
+              <div key={ind} className='auth-error'>{error}</div>
+            ))}
+            <div className='auth-input-container'>
+              <label htmlFor='email'>EMAIL</label>
+              <input
+                name='email'
+                type='text'
+                value={email}
+                onChange={updateEmail}
+              />
+            </div>
+            <div className='auth-input-container'>
+              <label htmlFor='password'>PASSWORD</label>
+              <input
+                name='password'
+                type='password'
+                value={password}
+                onChange={updatePassword}
+              />
+            </div>
+            <button className='auth-button' type='submit'>Login</button>
+          </form>
         </div>
-        <form onSubmit={onLogin}>
-          {errors.map((error, ind) => (
-            <div key={ind} className='auth-error'>{error}</div>
-          ))}
-          <div className='auth-input-container'>
-            <label htmlFor='email'>EMAIL</label>
-            <input
-              name='email'
-              type='text'
-              value={email}
-              onChange={updateEmail}
-            />
-          </div>
-          <div className='auth-input-container'>
-            <label htmlFor='password'>PASSWORD</label>
-            <input
-              name='password'
-              type='password'
-              value={password}
-              onChange={updatePassword}
-            />
-          </div>
-          <button className='auth-button' type='submit'>Login</button>
-        </form>
       </div>
     </div>
   );

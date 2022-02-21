@@ -42,7 +42,15 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      <Switch>
+        <Route path={['/login', '/sign-up']}>
+          {null}
+        </Route>
+        <Route>
+          <NavBar />
+        </Route>
+      </Switch>
+
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />

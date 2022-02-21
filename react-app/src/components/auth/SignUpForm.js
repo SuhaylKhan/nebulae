@@ -70,83 +70,85 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className='auth-form-container'>
-      <div className='auth-form-inner'>
-        <div className='auth-text-container'>
-          <div>Create an account</div>
-          <div>
-            Not conviced?
-            <button onClick={handleDemo}>Demo</button>
+    <div className='auth-form-outer'>
+      <div className='auth-form-container'>
+        <div className='auth-form-inner'>
+          <div className='auth-text-container'>
+            <div>Create an account</div>
+            <div>
+              Not conviced?
+              <button onClick={handleDemo}>Demo</button>
+            </div>
+            <div>
+              Already have an account?
+              <NavLink to='/login' exact={true} activeClassName='active'>
+                Log in
+              </NavLink>
+            </div>
           </div>
-          <div>
-            Already have an account?
-            <NavLink to='/login' exact={true} activeClassName='active'>
-              Log in
-            </NavLink>
-          </div>
+          <form onSubmit={onSignUp}>
+            <div>
+              {errors.map((error, ind) => (
+                <div key={ind} className='auth-error'>{error}</div>
+              ))}
+            </div>
+            <div className='auth-input-container'>
+              <label>FIRST NAME</label>
+              <input
+                type='text'
+                name='firstName'
+                onChange={updateFirstName}
+                value={firstName}
+              ></input>
+            </div>
+            <div className='auth-input-container'>
+              <label>LAST NAME</label>
+              <input
+                type='text'
+                name='lasttName'
+                onChange={updateLastName}
+                value={lastName}
+              ></input>
+            </div>
+            <div className='auth-input-container'>
+              <label>USERNAME</label>
+              <input
+                type='text'
+                name='username'
+                onChange={updateUsername}
+                value={username}
+              ></input>
+            </div>
+            <div className='auth-input-container'>
+              <label>EMAIL</label>
+              <input
+                type='text'
+                name='email'
+                onChange={updateEmail}
+                value={email}
+              ></input>
+            </div>
+            <div className='auth-input-container'>
+              <label>PASSWORD</label>
+              <input
+                type='password'
+                name='password'
+                onChange={updatePassword}
+                value={password}
+              ></input>
+            </div>
+            <div className='auth-input-container'>
+              <label>CONFIRM PASSWORD</label>
+              <input
+                type='password'
+                name='repeat_password'
+                onChange={updateRepeatPassword}
+                value={repeatPassword}
+              ></input>
+            </div>
+            <button className='auth-button' type='submit'>Sign Up</button>
+          </form>
         </div>
-        <form onSubmit={onSignUp}>
-          <div>
-            {errors.map((error, ind) => (
-              <div key={ind} className='auth-error'>{error}</div>
-            ))}
-          </div>
-          <div className='auth-input-container'>
-            <label>FIRST NAME</label>
-            <input
-              type='text'
-              name='firstName'
-              onChange={updateFirstName}
-              value={firstName}
-            ></input>
-          </div>
-          <div className='auth-input-container'>
-            <label>LAST NAME</label>
-            <input
-              type='text'
-              name='lasttName'
-              onChange={updateLastName}
-              value={lastName}
-            ></input>
-          </div>
-          <div className='auth-input-container'>
-            <label>USERNAME</label>
-            <input
-              type='text'
-              name='username'
-              onChange={updateUsername}
-              value={username}
-            ></input>
-          </div>
-          <div className='auth-input-container'>
-            <label>EMAIL</label>
-            <input
-              type='text'
-              name='email'
-              onChange={updateEmail}
-              value={email}
-            ></input>
-          </div>
-          <div className='auth-input-container'>
-            <label>PASSWORD</label>
-            <input
-              type='password'
-              name='password'
-              onChange={updatePassword}
-              value={password}
-            ></input>
-          </div>
-          <div className='auth-input-container'>
-            <label>CONFIRM PASSWORD</label>
-            <input
-              type='password'
-              name='repeat_password'
-              onChange={updateRepeatPassword}
-              value={repeatPassword}
-            ></input>
-          </div>
-          <button className='auth-button' type='submit'>Sign Up</button>
-        </form>
       </div>
     </div>
   );
