@@ -33,6 +33,11 @@ const LoginForm = () => {
 
   return (
     <div className='auth-form-outer'>
+      <div className='auth-form-home-link'>
+        <NavLink to='/' exact={true} activeClassName='active'>
+          N E B U L A E
+        </NavLink>
+      </div>
       <div className='auth-form-container'>
         <div className='auth-form-inner'>
           <div className='auth-text-container'>
