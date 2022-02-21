@@ -59,7 +59,11 @@ function EditServerForm() {
     const data = await dispatch(deleteServer(serverId))
 
     if (data === 'DELETE SUCCESSFUL') {
-      history.push(`/users/${user.id}/servers`);
+      if (user.servers[0]) {
+        history.push(`/servers/${user.servers[0].id}/channels`);
+      } else {
+        history.push(`/servers/new`);
+      }
       return
     } else if (data.errors) {
       setErrors(data.errors)
