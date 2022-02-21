@@ -28,7 +28,11 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to={`/users/${user.id}/servers`} />;
+    if (user.servers[0]) {
+      return <Redirect to={`/servers/${user.servers[0].id}/channels`} />;
+    }
+
+    return <Redirect to={`/servers/new`} />;
   }
 
   return (
