@@ -58,15 +58,6 @@
   grid-column-start: 3;
 }
 
-/* #servers-container {
-  margin: 0 auto;
-  max-width: 75%;
-  padding-bottom: 25px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-} */
-
 #servers-container {
   margin: 0 auto;
   max-width: 75%;
@@ -74,7 +65,6 @@
 
 #servers-scrollable {
   display: flex;
-  justify-content: center;
   overflow-x: scroll;
 }
 
