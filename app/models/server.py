@@ -18,5 +18,6 @@ class Server(db.Model):
     return {
       'id': self.id,
       'admin_id': self.admin_id,
-      'name': self.name
+      'name': self.name,
+      'channels': [channel.to_dict() for channel in self.channels]
     }
