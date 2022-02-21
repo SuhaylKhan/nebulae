@@ -12,9 +12,7 @@ const NavBar = () => {
     <nav id='nav-bar'>
       <ul id='nav-bar-list'>
         <li id='home-button' className='nav-bar-navlink'>
-          <NavLink to='/' exact={true} activeClassName='active'>
-            N E B U L A E
-          </NavLink>
+          <div>N E B U L A E</div>
         </li>
         {user ?
           <li id='logout'>

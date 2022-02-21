@@ -24,11 +24,11 @@
   font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   font-weight: bold;
-  transition: 0.2s;
+  color: var(--wildCard);
 }
 
 #home-button > *:hover {
-  color: var(--wildCard);
+  cursor: default;
 }
 
 .nav-bar-navlink > * {
