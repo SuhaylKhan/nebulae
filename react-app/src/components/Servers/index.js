@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useServerContext } from '../../context/ServerContext';
+import './Servers.css';
 
 function Servers() {
-  const history = useHistory();
   const servers = useSelector(state => state.servers);
   const { setServerId } = useServerContext();
 
@@ -12,16 +12,24 @@ function Servers() {
       {Object.keys(servers).map(serverId => {
         const server = servers[serverId]
         return (
-          <button
-            key={server.id}
-            onClick={() => {
-              setServerId(server.id);
-              history.push(`/servers/${server.id}/channels`);
-            }}
-          >{server.name}</button>
+          <NavLink
+            key={serverId}
+            onClick={() => setServerId(server.id)}
+            to={`/servers/${server.id}/channels`}
+            exact={true}
+            className='server-links'
+            activeClassName='selected'
+          >
+            {server.name}
+          </NavLink>
         )
       })}
-      <button onClick={() => history.push('/servers/new')}>+</button>
+      <NavLink
+        to='/servers/new'
+        exact={true}
+        className='server-links'
+        activeClassName='selected'
+      >+</NavLink>
     </>
   )
 }

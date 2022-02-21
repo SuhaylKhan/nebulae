@@ -35,9 +35,11 @@ const NavBar = () => {
           </li>
         }
       </ul>
-      {user &&
-        <Servers />
-      }
+      <div id='servers-container'>
+        {user &&
+          <Servers />
+        }
+      </div>
     </nav>
   );
 }
