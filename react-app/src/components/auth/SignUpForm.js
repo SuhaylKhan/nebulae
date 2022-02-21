@@ -57,7 +57,7 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to={`/users/${user.id}/servers`} />;
+    return <Redirect to={`/servers/new`} />;
   }
 
   const handleDemo = async () => {
