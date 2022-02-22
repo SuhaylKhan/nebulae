@@ -5,6 +5,7 @@ import { Modal } from '../../context/Modal';
 import { useServerContext } from '../../context/ServerContext';
 import AddServerForm from '../AddServerForm';
 import CreateServerForm from '../AddServerForm/CreateServerForm';
+import JoinServerForm from '../AddServerForm/JoinServerForm';
 import './Servers.css';
 
 function Servers() {
@@ -55,7 +56,7 @@ function Servers() {
       }
       {showModal && serverAction === 'JOIN' &&
         <Modal onClose={onClose}>
-
+          <JoinServerForm props={{ setServerAction, onClose }} />
         </Modal>
       }
     </>

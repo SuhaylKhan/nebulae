@@ -49,7 +49,7 @@ function CreateServerForm({ props }) {
         ))}
         <form onSubmit={newServer}>
           <div className='server-input-container'>
-            <label htmlFor='name'>Server Name</label>
+            <label htmlFor='name'>SERVER NAME</label>
             <input
               type='text'
               name='name'
