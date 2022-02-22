@@ -42,20 +42,29 @@ function CreateServerForm({ props }) {
 
   return (
     <>
-      <div>Create New Server</div>
-      {errors.length === 0 ? null : errors.map((error, i) => (
-        <div key={i}>{error}</div>
-      ))}
-      <form onSubmit={newServer}>
-        <label htmlFor='name'>Server Name</label>
-        <input
-          type='text'
-          name='name'
-          value={serverName}
-          onChange={e => setServerName(e.target.value)}
-        />
-        <button type='submit'>CREATE SERVER</button>
-      </form>
+      <div className='server-form'>
+        <div className='server-form-header'>Create New Server</div>
+        {errors.length === 0 ? null : errors.map((error, i) => (
+          <div key={i} className='server-error'>{error}</div>
+        ))}
+        <form onSubmit={newServer}>
+          <div className='server-input-container'>
+            <label htmlFor='name'>Server Name</label>
+            <input
+              type='text'
+              name='name'
+              value={serverName}
+              onChange={e => setServerName(e.target.value)}
+            />
+          </div>
+          <button
+            className='server-button'
+            type='submit'
+          >
+            CREATE SERVER
+          </button>
+        </form>
+      </div>
     </>
   )
 }

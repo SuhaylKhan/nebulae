@@ -4,8 +4,8 @@
   border-radius: 10px;
   padding: 35px;
   background-color: var(--black1);
-
   text-align: center;
+  width: 25vw;
 }
 
 .server-form-header {
@@ -35,4 +35,44 @@
   background-color: var(--outerspace);
   color: var(--wildCard);
   cursor: pointer;
+}
+
+.server-input-container {
+  display: grid;
+  grid-template-rows: 0.75fr 1fr;
+  margin-bottom: 20px;
+  text-align: start;
+}
+
+.server-input-container > input {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--black3);
+  border: 1px solid var(--outerspace);
+  color: var(--pinkWhite);
+}
+
+.server-input-container > input:focus-visible {
+  outline: 2px solid var(--wildCard);
+}
+
+.server-button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background: var(--main);
+  color: var(--pinkWhite);
+  transition: 0.2s;
+}
+
+.server-button:hover {
+  cursor: pointer;
+  color: var(--wildCard);
+}
+
+.server-error {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--accentLight);
 }
