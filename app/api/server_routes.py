@@ -88,3 +88,16 @@ def join_server(server_id):
     else:
       return {'errors': ['Link is invalid']}, 400
   return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+
+@server_routes.route('/<int:server_id>/leave', methods=['POST'])
+def leave_server(server_id):
+  """
+  Removes user from server members
+  """
+  data = request.json
+  user = User.query.get(data['user_id'])
+  server = Server.query.get(data['server_id'])
+
+  server.members.remove(user)
+  db.session.commit()
+  return {}

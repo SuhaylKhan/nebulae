@@ -150,7 +150,7 @@ export const joinServer = (inviteLink, userId) => async dispatch => {
       server_name: serverName
     })
   })
-  
+
   if (response.ok) {
     const data = await response.json();
     dispatch(addServer(data));
@@ -160,6 +160,26 @@ export const joinServer = (inviteLink, userId) => async dispatch => {
     if (data.errors) {
       return data;
     }
+  } else {
+    return { errors: ['An error occurred. Please try again.']}
+  }
+}
+
+export const leaveServer = (serverId, userId) => async dispatch => {
+  const response = await fetch(`/api/servers/${serverId}/leave`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      user_id: userId,
+      server_id: serverId
+    })
+  })
+
+  if (response.ok) {
+    dispatch(removeOne(serverId));
+    return 'LEAVE SUCCESSFUL';
   } else {
     return { errors: ['An error occurred. Please try again.']}
   }
