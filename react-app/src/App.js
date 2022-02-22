@@ -5,7 +5,6 @@ import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import AddServerForm from './components/AddServerForm'
 import HomePage from './components/HomePage';
 import EditServerForm from './components/EditServerForm';
 import Channels from './components/Channels';
@@ -59,10 +58,6 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-
-        <ProtectedRoute path='/servers/new' exact={true} >
-          <AddServerForm />
-        </ProtectedRoute>
 
         <ProtectedRoute path='/servers/:serverId/edit' exact={true} >
           <EditServerForm />

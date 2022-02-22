@@ -57,6 +57,10 @@ const SignUpForm = () => {
   };
 
   if (user) {
+    if (user.servers[0]) {
+      return <Redirect to={`/servers/${user.servers[0].id}/channels`} />;
+    }
+
     return <Redirect to={`/servers/new`} />;
   }
 
