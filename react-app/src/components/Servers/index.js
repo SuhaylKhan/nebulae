@@ -36,6 +36,7 @@ function Servers() {
         )
       })}
       <button
+        className='server-links-new'
         onClick={() => {
           setShowModal(true);
         }}
