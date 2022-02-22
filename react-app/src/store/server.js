@@ -111,6 +111,60 @@ export const deleteServer = serverId => async dispatch => {
   }
 }
 
+export const joinServer = (inviteLink, userId) => async dispatch => {
+  const linkComponents = inviteLink.split('/');
+  let serverName;
+  let serverId;
+
+  if (linkComponents.length === 4) {
+    const serverDetails = linkComponents[3].split('#');
+    linkComponents.splice(3, 1, ...serverDetails);
+    serverName = linkComponents[3];
+    serverId = parseInt(linkComponents[4], 10);
+
+    if (linkComponents[0] !== 'https:' || linkComponents[1] !== '' ||
+        linkComponents[2] !== 'nebulae.gg' || isNaN(serverId)) {
+          return {errors: ['Link is invalid']};
+    }
+  } else if (linkComponents.length === 1) {
+    const serverDetails = linkComponents[0].split('#');
+    linkComponents.splice(0, 1, ...serverDetails);
+    serverName = linkComponents[0];
+    serverId = parseInt(linkComponents[1], 10);
+
+    if (isNaN(serverId)) {
+      return {errors: ['Link is invalid']};
+    }
+  } else {
+    return {errors: ['Link is invalid']};
+  }
+
+  const response = await fetch(`/api/servers/${serverId}/join`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      user_id: userId,
+      server_id: serverId,
+      server_name: serverName
+    })
+  })
+  
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(addServer(data));
+    return data;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data;
+    }
+  } else {
+    return { errors: ['An error occurred. Please try again.']}
+  }
+}
+
 export default function reducer(state = initialState, action) {
   let newState = {...state}
   switch (action.type) {

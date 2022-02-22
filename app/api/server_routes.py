@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from datetime import datetime, timezone
-from app.forms import NewServerForm, EditServerForm
-from app.models import db, Server
+from app.forms import NewServerForm, EditServerForm, JoinServerForm
+from app.models import db, Server, User
 
 server_routes = Blueprint('server', __name__)
 
@@ -68,3 +68,22 @@ def servers_channels(server_id):
   """
   server = Server.query.get(server_id)
   return {'channels': [channel.to_dict() for channel in server.channels]}
+
+@server_routes.route('/<int:server_id>/join', methods=['POST'])
+def join_server(server_id):
+  """
+  Adds user to a server
+  """
+  form = JoinServerForm()
+  form['csrf_token'].data = request.cookies['csrf_token']
+
+  user = User.query.get(form.data['user_id'])
+  server = Server.query.get(form.data['server_id'])
+
+  if form.validate_on_submit():
+    if server and (server.name == form.data['server_name']):
+      server.members.append(user)
+      return server.to_dict()
+    else:
+      return {'errors': ['Link is invalid']}, 400
+  return {'errors': validation_errors_to_error_messages(form.errors)}, 400
