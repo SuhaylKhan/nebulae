@@ -2,25 +2,29 @@ import { useEffect, useState } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { loadChannels } from '../../store/channel';
+import NoServers from '../Servers/NoServers';
 import ServerPanel from '../Servers/ServerPanel';
+import './Channels.css';
 
 function Channels() {
   const dispatch = useDispatch();
-  const location = useLocation();
+  // const location = useLocation();
   const history = useHistory();
-  const { serverId } = useParams();
-  const servers = useSelector(state => state.servers);
+  const { currChannelId } = useParams();
+  // const servers = useSelector(state => state.servers);
   const channels = useSelector(state => state.channels);
   const user = useSelector(state => state.session.user);
-  const [currChannelId, setCurrChannelId] = useState(location.state?.channelId || '');
+  // const [currChannelId, setCurrChannelId] = useState(location.state?.channelId || '');
 
   useEffect(() => {
-    (async () => await dispatch(loadChannels(serverId)))()
-  }, [dispatch, serverId])
+    if (currChannelId) {
+      (async () => await dispatch(loadChannels(channels[currChannelId].server.id)))()
+    }
+  }, [dispatch])
 
   return (
     <>
-      <div>
+      {/* <div>
         <h1>{servers[serverId]?.name}</h1>
         <ServerPanel server={servers[serverId]} />
         {Object.keys(channels).map(channelId => {
@@ -60,6 +64,38 @@ function Channels() {
             </div>
           </>
         }
+      </div> */}
+      <div id='channels-container'>
+        <div id='channels-panel'>
+          <div>CHANNELS</div>
+          {Object.keys(channels).map(channelId => {
+              const channel = channels[channelId];
+              return (
+                <div key={channelId}>
+                  <button
+                    onClick={() => history.push(`/channels/${channelId}`)}
+                  >{channel.name}</button>
+                  {currChannelId === channelId && user.id === channel.server.adminId &&
+                    <button>edit</button>
+                  }
+                </div>
+              )
+            })}
+        </div>
+        <div>
+          {user.servers[0] ?
+            <>
+              <div>THIS USER HAS AT LEAST 1 SERVER</div>
+              {user.servers[0].channels[0] ?
+                <div>THAT SERVER HAS AT LEAST 1 CHANNEL</div>
+                :
+                <div>THAT SERVER HAS NO CHANNELS</div>
+              }
+            </>
+            :
+            <NoServers />
+          }
+        </div>
       </div>
     </>
   )
