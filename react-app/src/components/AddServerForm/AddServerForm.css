@@ -1,0 +1,38 @@
+.server-form {
+  display: grid;
+  row-gap: 20px;
+  border-radius: 10px;
+  padding: 35px;
+  background-color: var(--black1);
+
+  text-align: center;
+}
+
+.server-form-header {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.server-form-subheader {
+  color: var(--white3);
+}
+
+.server-form-button {
+  border: none;
+  background: none;
+  padding: 20px;
+
+  background-color: var(--black3);
+  border-radius: 5px;
+
+  color: var(--pinkWhite);
+  font-size: 15px;
+
+  transition: 0.2s;
+}
+
+.server-form-button:hover {
+  background-color: var(--outerspace);
+  color: var(--wildCard);
+  cursor: pointer;
+}
