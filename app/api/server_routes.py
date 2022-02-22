@@ -83,6 +83,7 @@ def join_server(server_id):
   if form.validate_on_submit():
     if server and (server.name == form.data['server_name']):
       server.members.append(user)
+      db.session.commit()
       return server.to_dict()
     else:
       return {'errors': ['Link is invalid']}, 400

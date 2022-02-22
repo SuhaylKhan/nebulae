@@ -38,7 +38,11 @@ function ServerPanel({server}) {
       {showPanel &&
         <div>
           <div>Server Details</div>
-          {user.id === server.admin_id &&
+          {user.id === server.admin_id ?
+            <div className='details-panel'>
+              <button onClick={handleEditClick}>EDIT</button>
+            </div>
+            :
             <div className='details-panel'>
               <button onClick={handleEditClick}>EDIT</button>
             </div>
