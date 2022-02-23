@@ -80,6 +80,10 @@ function App() {
           <EditChannelForm />
         </ProtectedRoute>
 
+        <ProtectedRoute path='/channels/:channelId' >
+          <Channels />
+        </ProtectedRoute>
+
         <Route path='/' exact={true} >
           <HomePage />
           <Footer />

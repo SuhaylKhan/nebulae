@@ -21,7 +21,7 @@ function Channels() {
     if (currChannelId) {
       (async () => await dispatch(loadChannels(channels[currChannelId].server.id)))()
     }
-  }, [dispatch])
+  })
 
   return (
     <>
@@ -83,7 +83,7 @@ function Channels() {
               )
             })}
         </div>
-        <div>
+        {/* <div>
           {user.servers[0] ?
             <>
               <div>THIS USER HAS AT LEAST 1 SERVER</div>
@@ -97,7 +97,8 @@ function Channels() {
             :
             <NoServers />
           }
-        </div>
+        </div> */}
+        <ChannelDetails props={{ channel: channels[currChannelId] }} />
       </div>
     </>
   )

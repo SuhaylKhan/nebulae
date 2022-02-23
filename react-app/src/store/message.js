@@ -1,10 +1,16 @@
 const SET_MESSAGES = 'message/SET_MESSAGES';
+const ADD_MESSAGE = 'message/ADD_MESSAGE';
 
 const initialState = {};
 
 const setMessages = messages => ({
   type: SET_MESSAGES,
   payload: messages
+})
+
+const addMessage = message => ({
+  type: ADD_MESSAGE,
+  payload: message
 })
 
 export const loadMessages = channelId => async dispatch => {
@@ -14,6 +20,26 @@ export const loadMessages = channelId => async dispatch => {
     const data = await response.json()
     console.log(data)
     dispatch(setMessages(data.messages));
+    return;
+  }
+}
+
+export const createMessage = message => async dispatch => {
+  const response = await fetch(`/api/messages/new`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      user_id: message.userId,
+      channel_id: message.channelId,
+      content: message.content
+    })
+  })
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(addMessage(data));
     return;
   }
 }
@@ -28,6 +54,9 @@ export default function reducer(state = initialState, action) {
           [b.id]: b
         }
       }, {})
+      return newState;
+    case ADD_MESSAGE:
+      newState[action.payload.id] = action.payload;
       return newState;
     default:
       return state;

@@ -1,19 +1,26 @@
 import { io } from 'socket.io-client';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { createMessage } from '../../store/message';
 
 let socket;
 
-function Chat() {
+function Chat({ props }) {
   const user = useSelector(state => state.session.user);
-  const [messages, setMessages] = useState([]);
+  // const [messages, setMessages] = useState([]);
   const [chatInput, setChatInput] = useState('');
+
+  const messages = useSelector(state => state.messages)
+  const { channel } = props;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     socket = io();
 
     socket.on('chat', (chat) => {
-      setMessages(messages => [...messages, chat])
+      // setMessages(messages => [...messages, chat])
+      console.log('======>', chat)
+      dispatch(createMessage(chat))
     })
 
     return (() => {
@@ -24,16 +31,16 @@ function Chat() {
 
   const sendChat = e => {
     e.preventDefault();
-    socket.emit('chat', { user: user.username, msg: chatInput });
+    socket.emit('chat', { userId: user.id, content: chatInput, channelId: 1 });
     setChatInput('');
   }
 
   return (
     <>
       <div>
-        {messages.map((message, i) => {
+        {Object.values(messages).map((message, i) => {
           return (
-            <div key={i}>{`${message.user}: ${message.msg}`}</div>
+            <div key={i}>{`${message.user.username}: ${message.content}`}</div>
           )
         })}
       </div>
