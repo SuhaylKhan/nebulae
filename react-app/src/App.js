@@ -51,9 +51,9 @@ function App() {
         </Route>
       </Switch>
 
-      {user &&
+      {/* {user &&
         <Channels />
-      }
+      } */}
 
       <Switch>
         <Route path='/login' exact={true}>

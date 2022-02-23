@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { loadChannels } from '../../store/channel';
+import ChannelDetails from '../ChannelDetails';
 import NoServers from '../Servers/NoServers';
 import ServerPanel from '../Servers/ServerPanel';
 import './Channels.css';
@@ -87,7 +88,8 @@ function Channels() {
             <>
               <div>THIS USER HAS AT LEAST 1 SERVER</div>
               {user.servers[0].channels[0] ?
-                <div>THAT SERVER HAS AT LEAST 1 CHANNEL</div>
+                // <div>THAT SERVER HAS AT LEAST 1 CHANNEL</div>
+                <ChannelDetails props={{ channel: channels[currChannelId] }} />
                 :
                 <div>THAT SERVER HAS NO CHANNELS</div>
               }
