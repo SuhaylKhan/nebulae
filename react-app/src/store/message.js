@@ -18,7 +18,6 @@ export const loadMessages = channelId => async dispatch => {
 
   if (response.ok) {
     const data = await response.json()
-    console.log(data)
     dispatch(setMessages(data.messages));
     return;
   }

@@ -19,7 +19,6 @@ function Chat({ props }) {
 
     socket.on('chat', (chat) => {
       // setMessages(messages => [...messages, chat])
-      console.log('======>', chat)
       dispatch(createMessage(chat))
     })
 
