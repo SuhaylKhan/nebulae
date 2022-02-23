@@ -32,17 +32,29 @@ function Chat({ props }) {
     setChatInput('');
   }
 
+  const handleMouseEnter = e => {
+    e.currentTarget.lastChild.hidden = false;
+  }
+
+  const handleMouseLeave = e => {
+    e.currentTarget.lastChild.hidden = true;
+  }
+
   return (
     <>
       <div>
         {Object.values(messages).map((message, i) => {
           return (
-            <div key={i}>
+            <div
+              key={i}
+              onMouseEnter={user.id === message.user.id ? handleMouseEnter : null}
+              onMouseLeave={user.id === message.user.id ? handleMouseLeave : null}
+            >
               <div>
                 {`${message.user.username}: ${message.content}`}
               </div>
               {user.id === message.user.id &&
-                <div>
+                <div hidden={true}>
                   <button>edit</button>
                   <button
                     onClick={() => {
