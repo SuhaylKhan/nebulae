@@ -1,13 +1,12 @@
 import { io } from 'socket.io-client';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createMessage } from '../../store/message';
+import { createMessage, deleteMessage } from '../../store/message';
 
 let socket;
 
 function Chat({ props }) {
   const user = useSelector(state => state.session.user);
-  // const [messages, setMessages] = useState([]);
   const [chatInput, setChatInput] = useState('');
 
   const messages = useSelector(state => state.messages)
@@ -18,7 +17,6 @@ function Chat({ props }) {
     socket = io();
 
     socket.on('chat', (chat) => {
-      // setMessages(messages => [...messages, chat])
       dispatch(createMessage(chat))
     })
 
@@ -39,7 +37,23 @@ function Chat({ props }) {
       <div>
         {Object.values(messages).map((message, i) => {
           return (
-            <div key={i}>{`${message.user.username}: ${message.content}`}</div>
+            <div key={i}>
+              <div>
+                {`${message.user.username}: ${message.content}`}
+              </div>
+              {user.id === message.user.id &&
+                <div>
+                  <button>edit</button>
+                  <button
+                    onClick={() => {
+                      dispatch(deleteMessage(message.id));
+                    }}
+                  >
+                    delete
+                  </button>
+                </div>
+              }
+            </div>
           )
         })}
       </div>

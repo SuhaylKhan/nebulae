@@ -1,5 +1,6 @@
 const SET_MESSAGES = 'message/SET_MESSAGES';
 const ADD_MESSAGE = 'message/ADD_MESSAGE';
+const REMOVE_ONE = 'message/REMOVE_ONE';
 
 const initialState = {};
 
@@ -11,6 +12,11 @@ const setMessages = messages => ({
 const addMessage = message => ({
   type: ADD_MESSAGE,
   payload: message
+})
+
+const removeOne = messageId => ({
+  type: REMOVE_ONE,
+  payload: messageId
 })
 
 export const loadMessages = channelId => async dispatch => {
@@ -43,6 +49,17 @@ export const createMessage = message => async dispatch => {
   }
 }
 
+export const deleteMessage = messageId => async dispatch => {
+  const response = await fetch(`/api/messages/${messageId}/delete`, {
+    method: 'DELETE'
+  })
+
+  if (response.ok) {
+    dispatch(removeOne(messageId));
+    return;
+  }
+}
+
 export default function reducer(state = initialState, action) {
   let newState = {...state};
   switch (action.type) {
@@ -56,6 +73,9 @@ export default function reducer(state = initialState, action) {
       return newState;
     case ADD_MESSAGE:
       newState[action.payload.id] = action.payload;
+      return newState;
+    case REMOVE_ONE:
+      delete newState[action.payload];
       return newState;
     default:
       return state;
