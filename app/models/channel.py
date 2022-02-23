@@ -19,5 +19,4 @@ class Channel(db.Model):
       'server_id': self.server_id,
       'name': self.name,
       'description': self.description,
-      'server': self.server
     }
