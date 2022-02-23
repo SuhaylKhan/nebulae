@@ -51,9 +51,9 @@ function App() {
         </Route>
       </Switch>
 
-      {user &&
+      {/* {user &&
         <Channels />
-      }
+      } */}
 
       <Switch>
         <Route path='/login' exact={true}>
@@ -78,6 +78,10 @@ function App() {
 
         <ProtectedRoute path='/channels/:channelId/edit' exact={true} >
           <EditChannelForm />
+        </ProtectedRoute>
+
+        <ProtectedRoute path='/channels/:channelId' >
+          <Channels />
         </ProtectedRoute>
 
         <Route path='/' exact={true} >
