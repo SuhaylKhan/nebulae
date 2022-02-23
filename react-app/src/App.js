@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import AddServerForm from './components/AddServerForm'
 import HomePage from './components/HomePage';
 import EditServerForm from './components/EditServerForm';
 import Channels from './components/Channels';
@@ -20,6 +19,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const { serverId } = useServerContext();
+  const user = useSelector(state => state.session.user);
 
   useEffect(() => {
     (async() => {
@@ -51,6 +51,10 @@ function App() {
         </Route>
       </Switch>
 
+      {user &&
+        <Channels />
+      }
+
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -59,10 +63,6 @@ function App() {
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
-
-        <ProtectedRoute path='/servers/new' exact={true} >
-          <AddServerForm />
-        </ProtectedRoute>
 
         <ProtectedRoute path='/servers/:serverId/edit' exact={true} >
           <EditServerForm />

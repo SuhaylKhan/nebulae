@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
 import './AuthForm.css';
 
@@ -10,6 +10,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -28,11 +29,7 @@ const LoginForm = () => {
   };
 
   if (user) {
-    if (user.servers[0]) {
-      return <Redirect to={`/servers/${user.servers[0].id}/channels`} />;
-    }
-
-    return <Redirect to={`/servers/new`} />;
+    history.push(`/channels`)
   }
 
   return (
