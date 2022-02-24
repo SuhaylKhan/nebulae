@@ -8,7 +8,6 @@ function LeaveServer({ props }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector(state => state.session.user);
-  const servers = useSelector(state => state.servers);
 
   const handleLeave = async () => {
     const data = await dispatch(leaveServer(server.id, user.id))

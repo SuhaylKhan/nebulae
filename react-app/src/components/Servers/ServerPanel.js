@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { Modal } from '../../context/Modal';
+import EditServerForm from '../EditServerForm';
 import LeaveServer from '../LeaveServer';
 
 function ServerPanel({server}) {
-  const history = useHistory();
-
   const user = useSelector(state => state.session.user);
   const [showPanel, setShowPanel] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -32,10 +30,6 @@ function ServerPanel({server}) {
     else setShowPanel(true);
   }
 
-  const handleEditClick = () => {
-    history.push(`/servers/${server.id}/edit`);
-  }
-
   const onClose = () => {
     setShowModal(false);
     setServerAction('');
@@ -49,7 +43,14 @@ function ServerPanel({server}) {
           <div>Server Details</div>
           {user.id === server.admin_id ?
             <div className='details-panel'>
-              <button onClick={handleEditClick}>EDIT</button>
+              <button
+                onClick={() => {
+                  setShowModal(true);
+                  setServerAction('EDIT');
+                }}
+              >
+                EDIT
+              </button>
             </div>
             :
             <div className='details-panel'>
@@ -68,6 +69,11 @@ function ServerPanel({server}) {
       {showModal && serverAction === 'LEAVE' &&
         <Modal onClose={onClose}>
           <LeaveServer props={{ setServerAction, onClose, server }} />
+        </Modal>
+      }
+      {showModal && serverAction === 'EDIT' &&
+        <Modal onClose={onClose}>
+          <EditServerForm props={{ onClose }} />
         </Modal>
       }
     </>

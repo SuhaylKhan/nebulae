@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import { useParams, useHistory, useLocation, Redirect } from 'react-router-dom';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import { loadChannels } from '../../store/channel';
 import ChannelDetails from '../ChannelDetails';
 import ServerPanel from '../Servers/ServerPanel';
@@ -36,7 +36,7 @@ function Channels() {
   } else if (location.pathname === `/servers/${serverId}/channels` || location.pathname === `/servers/${serverId}/channels/`) {
     if (user.servers.length === 0) history.push('/servers');
 
-    const server = user.servers.find(server => server.channels.length > 0);
+    // const server = user.servers.find(server => server.channels.length > 0);
     // if (server) history.push(`/servers/${server.id}/channels/${server.channels[0].id}`);
   } else if (location.pathname === `/servers/${serverId}/channels/${currChannelId}` || location.pathname === `/servers/${serverId}/channels/${currChannelId}/`) {
     if (user.servers.length === 0) history.push('/servers');
