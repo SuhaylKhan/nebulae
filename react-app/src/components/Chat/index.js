@@ -48,12 +48,12 @@ function Chat({ props }) {
     e.preventDefault();
 
     if (!e.target.firstChild.value) e.target.firstChild.value = messages[e.target.id].content;
-
-    socket.emit('edit', { messageId: e.target.id, content: e.target.firstChild.value });
+    
+    socket.emit('edit', { messageId: e.target.id, content: e.target.lastChild.firstChild.value });
   }
 
   const deleteChat = e => {
-    socket.emit('delete', { messageId: e.target.id });
+    socket.emit('delete', { messageId: e.currentTarget.id });
   }
 
   return (

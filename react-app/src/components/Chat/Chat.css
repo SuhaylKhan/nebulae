@@ -1,9 +1,11 @@
 #chat-container {
-  padding-bottom: 25px;
   display: grid;
   grid-template-rows: 10fr 1fr;
   height: calc(862.4px - 110.8px);
   box-sizing: border-box;
+
+  overflow-y: scroll;
+  position: relative;
 }
 
 #message-list-container {
@@ -64,9 +66,14 @@
 
 #create-chat-input {
   padding: 25px 50px;
+  padding-bottom: 50px;
   display: grid;
   grid-template-columns: 10fr 1fr;
   column-gap: 5px;
+
+  position: sticky;
+  bottom: 0;
+  background-color: var(--outerspace);
 }
 
 .content-edit-input:focus-visible {
