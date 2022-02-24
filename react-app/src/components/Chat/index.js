@@ -1,13 +1,15 @@
 import { io } from 'socket.io-client';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createMessage, deleteMessage } from '../../store/message';
+import { createMessage, deleteMessage, updateMessage } from '../../store/message';
+import Message from './Message';
 
 let socket;
 
 function Chat({ props }) {
   const user = useSelector(state => state.session.user);
   const [chatInput, setChatInput] = useState('');
+  const [editInput, setEditInput] = useState('');
 
   const messages = useSelector(state => state.messages)
   const { channel } = props;
@@ -18,6 +20,14 @@ function Chat({ props }) {
 
     socket.on('chat', (chat) => {
       dispatch(createMessage(chat))
+    })
+
+    socket.on('edit', (edit) => {
+      dispatch(updateMessage(edit))
+    })
+
+    socket.on('delete', (chat) => {
+      dispatch(deleteMessage(chat))
     })
 
     return (() => {
@@ -32,12 +42,13 @@ function Chat({ props }) {
     setChatInput('');
   }
 
-  const handleMouseEnter = e => {
-    e.currentTarget.lastChild.hidden = false;
+  const editChat = e => {
+    e.preventDefault();
+    socket.emit('edit', { messageId: e.target.id, content: editChat });
   }
 
-  const handleMouseLeave = e => {
-    e.currentTarget.lastChild.hidden = true;
+  const deleteChat = e => {
+    socket.emit('delete', { messageId: e.target.id });
   }
 
   return (
@@ -45,27 +56,7 @@ function Chat({ props }) {
       <div>
         {Object.values(messages).map((message, i) => {
           return (
-            <div
-              key={i}
-              onMouseEnter={user.id === message.user.id ? handleMouseEnter : null}
-              onMouseLeave={user.id === message.user.id ? handleMouseLeave : null}
-            >
-              <div>
-                {`${message.user.username}: ${message.content}`}
-              </div>
-              {user.id === message.user.id &&
-                <div hidden={true}>
-                  <button>edit</button>
-                  <button
-                    onClick={() => {
-                      dispatch(deleteMessage(message.id));
-                    }}
-                  >
-                    delete
-                  </button>
-                </div>
-              }
-            </div>
+            <Message key={i} props={{ message, editInput, setEditInput, editChat, deleteChat }} />
           )
         })}
       </div>

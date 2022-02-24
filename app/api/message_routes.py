@@ -23,7 +23,22 @@ def new_message():
 
 @message_routes.route('/<int:id>/delete', methods=['DELETE'])
 def delete_message(id):
+  """
+  Deletes a message.
+  """
   message = ChannelMessage.query.get(id)
   db.session.delete(message)
   db.session.commit()
   return {}
+
+@message_routes.route('/<int:id>/edit', methods=['PUT'])
+def edit_message(id):
+  """
+  Updates a message.
+  """
+  data = request.json
+  message = ChannelMessage.query.get(id)
+  print('==========>', data)
+  message.content = data['content']
+  db.session.commit()
+  return message.to_dict()
