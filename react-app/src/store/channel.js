@@ -65,13 +65,13 @@ export const createChannel = newChannel => async dispatch => {
 }
 
 export const editChannel = channel => async dispatch => {
-  const response = await fetch(`/api/channels/${channel.channelId}/edit`, {
+  const response = await fetch(`/api/channels/${channel.currChannelId}/edit`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      channel_id: channel.channelId,
+      channel_id: channel.currChannelId,
       name: channel.channelName,
       description: channel.channelDescription
     })

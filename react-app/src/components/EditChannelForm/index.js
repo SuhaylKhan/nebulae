@@ -1,44 +1,27 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, useHistory, useLocation } from 'react-router-dom';
-import { editChannel, loadChannels, deleteChannel } from '../../store/channel';
+import { useParams, useHistory } from 'react-router-dom';
+import { editChannel, deleteChannel } from '../../store/channel';
+import { loadServers } from '../../store/server';
 
-function EditChannelForm() {
+function EditChannelForm({ props }) {
+  const { channel, onClose } = props;
   const dispatch = useDispatch();
   const history = useHistory();
-  const location = useLocation();
-  const { channelId } = useParams();
-  const channels = useSelector(state => state.channels);
+  const { currChannelId, serverId } = useParams();
   const user = useSelector(state => state.session.user);
   const [errors, setErrors] = useState([]);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [channelName, setChannelName] = useState('');
-  const [channelDescription, setChannelDescription] = useState('');
+  const [channelName, setChannelName] = useState(channel?.name || '');
+  const [channelDescription, setChannelDescription] = useState(channel?.description || '');
 
   useEffect(() => {
-    if (location.state) {
-      (async () => await dispatch(loadChannels(location.state?.serverId)))()
-    }
-  }, [dispatch, location.state])
-
-  useEffect(() => {
-    if (channels[channelId]?.name) setChannelName(channels[channelId]?.name)
-    if (channels[channelId]?.description) setChannelDescription(channels[channelId]?.description)
-  }, [channels, channelId])
+    dispatch(loadServers(user.id))
+  }, [dispatch, user.id])
 
   useEffect(() => {
     if (!user) setShowConfirm(false);
     if (!showConfirm) return;
-
-    const closeMenu = e => {
-      if (e.target.className === 'confirm-delete'
-        || e.target.parentNode.className === 'confirm-delete') return;
-      setShowConfirm(false);
-    }
-
-    document.addEventListener('click', closeMenu);
-
-    return () => document.removeEventListener('click', closeMenu);
   }, [showConfirm, user])
 
   const handleEdit = async e => {
@@ -46,7 +29,7 @@ function EditChannelForm() {
     setErrors([]);
 
     const updatedChannel = {
-      channelId,
+      currChannelId,
       channelName,
       channelDescription
     }
@@ -62,10 +45,8 @@ function EditChannelForm() {
       setErrors([]);
       setChannelName('');
       setChannelDescription('');
-      history.push({
-        pathname: `/servers/${location.state?.serverId}/channels`,
-        state: { channelId }
-      })
+      onClose();
+      history.push(`/servers/${data.server_id}/channels/${data.id}`);
       return;
     }
 
@@ -79,11 +60,13 @@ function EditChannelForm() {
 
   const handleDelete = async () => {
     setErrors([])
-    const data = await dispatch(deleteChannel(channelId))
+    const data = await dispatch(deleteChannel(currChannelId))
 
     if (data === 'DELETE SUCCESSFUL') {
-      history.push(`/servers/${location.state?.serverId}/channels`);
-      return
+      await dispatch(loadServers(user.id));
+      onClose();
+      history.push(`/servers/${serverId}/channels`);
+      return;
     } else if (data.errors) {
       setErrors(data.errors)
     };
@@ -91,18 +74,18 @@ function EditChannelForm() {
 
   return (
     <>
-      <h1>EDIT CHANNEL</h1>
-      {errors.length === 0 ? null : errors.map((error, i) => (
-        <div key={i}>{error}</div>
-      ))}
-      {channels[channelId] &&
+      <div className='server-form'>
+        <div className='server-form-header'>EDIT CHANNEL</div>
+        {errors.length === 0 ? null : errors.map((error, i) => (
+          <div key={i} className='server-error'>{error}</div>
+        ))}
         <form onSubmit={handleEdit}>
           <div>
             <label htmlFor='name'>Enter a new channel name</label>
             <input
               type='text'
               disabled={showConfirm ? true : false}
-              placeholder={channels[channelId].name}
+              placeholder={channel?.name}
               value={channelName}
               onChange={e => setChannelName(e.target.value)}
             />
@@ -111,7 +94,7 @@ function EditChannelForm() {
             <label htmlFor='description'>Update channel description</label>
             <textarea
               disabled={showConfirm ? true : false}
-              placeholder={channels[channelId].description}
+              placeholder={channel?.description}
               value={channelDescription}
               onChange={e => setChannelDescription(e.target.value)}
             ></textarea>
@@ -121,18 +104,17 @@ function EditChannelForm() {
             disabled={showConfirm ? true : false}
           >Update Channel</button>
         </form>
-      }
-      <button
-        onClick={handleClick}
-        disabled={showConfirm ? true : false}
-      >DELETE</button>
-      {showConfirm &&
-        <div>
-          <div>Are you sure you want to delete this channel?</div>
-          <button onClick={handleDelete}>Yes</button>
-          <button onClick={handleClick}>No</button>
-        </div>
-      }
+
+        {showConfirm ?
+          <div>
+            <div>Are you sure you want to delete this channel?</div>
+            <button onClick={handleDelete}>Yes</button>
+            <button onClick={handleClick}>No</button>
+          </div>
+          :
+          <button onClick={handleClick}>DELETE</button>
+        }
+      </div>
     </>
   )
 }

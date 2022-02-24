@@ -50,10 +50,6 @@ function App() {
         </Route>
       </Switch>
 
-      {/* {user &&
-        <Channels />
-      } */}
-
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />

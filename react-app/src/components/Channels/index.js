@@ -1,21 +1,30 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import { useParams, useHistory, useLocation } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { loadChannels } from '../../store/channel';
 import ChannelDetails from '../ChannelDetails';
 import ServerPanel from '../Servers/ServerPanel';
 import NoServers from '../Servers/NoServers'
 import './Channels.css';
 import NoChannels from './NoChannels';
+import EditChannelForm from '../EditChannelForm';
+import { Modal } from '../../context/Modal';
+import { loadServers } from '../../store/server';
 
 function Channels() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const location = useLocation();
   const { serverId, currChannelId } = useParams();
   const user = useSelector(state => state.session.user);
   const servers = useSelector(state => state.servers);
   const channels = useSelector(state => state.channels);
+
+  const [showModal, setShowModal] = useState(false);
+  const [serverAction, setServerAction] = useState('');
+
+  useEffect(() => {
+    dispatch(loadServers(user.id));
+  }, [dispatch, user.id])
 
   useEffect(() => {
     if (servers[serverId]) {
@@ -23,27 +32,17 @@ function Channels() {
     }
   }, [dispatch, serverId, servers])
 
-  if (location.pathname === '/servers' || location.pathname === '/servers/') {
-    if (user.servers.length !== 0) {
-      const server = user.servers.find(server => server.channels.length > 0);
-
-      if (server) {
-        history.push(`/servers/${server.id}/channels/${server.channels[0].id}`);
-      } else {
-        history.push(`/servers/${user.servers[0].id}/channels`);
+  useEffect(() => {
+    if (!currChannelId) {
+      if (servers[serverId]?.channels.length > 0) {
+        history.push(`/servers/${serverId}/channels/${servers[serverId]?.channels[0].id}`)
       }
     }
-  } else if (location.pathname === `/servers/${serverId}/channels` || location.pathname === `/servers/${serverId}/channels/`) {
-    if (user.servers.length === 0) history.push('/servers');
+  }, [currChannelId, serverId, servers, history])
 
-    // const server = user.servers.find(server => server.channels.length > 0);
-    // if (server) history.push(`/servers/${server.id}/channels/${server.channels[0].id}`);
-  } else if (location.pathname === `/servers/${serverId}/channels/${currChannelId}` || location.pathname === `/servers/${serverId}/channels/${currChannelId}/`) {
-    if (user.servers.length === 0) history.push('/servers');
-
-    const server = user.servers.find(server => server.channels.length > 0);
-    console.log('=====>', server)
-    if (!server) history.push(`/servers/${user.servers[0]?.id}/channels`);
+  const onClose = () => {
+    setShowModal(false);
+    setServerAction('');
   }
 
   return (
@@ -65,7 +64,14 @@ function Channels() {
                     onClick={() => history.push(`/servers/${channel.server_id}/channels/${channelId}`)}
                   >{channel.name}</button>
                   {currChannelId === channelId && user.id === servers[serverId]?.admin_id &&
-                    <button>edit</button>
+                    <button
+                      onClick={() => {
+                        setShowModal(true);
+                        setServerAction('EDIT')
+                      }}
+                    >
+                      edit
+                    </button>
                   }
                 </div>
               )
@@ -95,6 +101,12 @@ function Channels() {
           }
         </div>
       </div>
+
+      {showModal && serverAction === 'EDIT' &&
+        <Modal onClose={onClose}>
+          <EditChannelForm props={{ channel: channels[currChannelId], onClose }} />
+        </Modal>
+      }
     </>
   )
 }
