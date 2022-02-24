@@ -11,9 +11,9 @@ import Channels from './components/Channels';
 import AddChannelForm from './components/AddChannelForm';
 import { authenticate } from './store/session';
 import EditChannelForm from './components/EditChannelForm';
-import { useServerContext } from './context/ServerContext';
 import { loadChannels } from './store/channel';
 import Footer from './components/Footer';
+import { useServerContext } from './context/ServerContext';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -50,10 +50,6 @@ function App() {
         </Route>
       </Switch>
 
-      {/* {user &&
-        <Channels />
-      } */}
-
       <Switch>
         <Route path='/login' exact={true}>
           <LoginForm />
@@ -63,12 +59,12 @@ function App() {
           <SignUpForm />
         </Route>
 
-        <ProtectedRoute path='/servers/:serverId/edit' exact={true} >
-          <EditServerForm />
+        <ProtectedRoute path={['/servers', '/servers/:serverId/channels/', '/servers/:serverId/channels/:currChannelId']} exact={true} >
+          <Channels />
         </ProtectedRoute>
 
-        <ProtectedRoute path='/servers/:serverId/channels' exact={true} >
-          <Channels />
+        <ProtectedRoute path='/servers/:serverId/edit' exact={true} >
+          <EditServerForm />
         </ProtectedRoute>
 
         <ProtectedRoute path='/channels/new' exact={true} >

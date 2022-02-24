@@ -2,6 +2,7 @@ const SET_CHANNELS = 'channels/SET_CHANNELS';
 const ADD_CHANNEL = 'channels/ADD_CHANNEL';
 const UPDATE_CHANNEL = 'channels/UPDATE_CHANNEL';
 const REMOVE_ONE = 'channels/REMOVE_ONE';
+const REMOVE_ALL = 'channels/REMOVE_ALL';
 
 const initialState = {}
 
@@ -23,6 +24,10 @@ const updateChannel = channel => ({
 const removeOne = channelId => ({
   type: REMOVE_ONE,
   payload: channelId
+})
+
+const removeAll = () => ({
+  type: REMOVE_ALL
 })
 
 export const loadChannels = serverId => async dispatch => {
@@ -65,13 +70,13 @@ export const createChannel = newChannel => async dispatch => {
 }
 
 export const editChannel = channel => async dispatch => {
-  const response = await fetch(`/api/channels/${channel.channelId}/edit`, {
+  const response = await fetch(`/api/channels/${channel.currChannelId}/edit`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      channel_id: channel.channelId,
+      channel_id: channel.currChannelId,
       name: channel.channelName,
       description: channel.channelDescription
     })
@@ -104,6 +109,11 @@ export const deleteChannel = channelId => async dispatch => {
   }
 }
 
+export const removeAllChannels = () => async dispatch => {
+  dispatch(removeAll());
+  return;
+}
+
 export default function reducer(state = initialState, action) {
   let newState = {...state};
   switch (action.type) {
@@ -123,6 +133,9 @@ export default function reducer(state = initialState, action) {
       return newState;
     case REMOVE_ONE:
       delete newState[action.payload];
+      return newState;
+    case REMOVE_ALL:
+      newState = {};
       return newState;
     default:
       return state;

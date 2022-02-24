@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Redirect, useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { createChannel } from '../../store/channel';
 
-function AddChannelForm() {
+function AddChannelForm({ props }) {
+  const { onClose, serverId } = props;
   const dispatch = useDispatch();
   const history = useHistory();
-  const location = useLocation();
 
   const [channelName, setChannelName] = useState('');
   const [channelDescription, setChannelDescription] = useState('');
@@ -17,7 +17,7 @@ function AddChannelForm() {
     setErrors([]);
 
     const newChannel = {
-      serverId: location.state.serverId,
+      serverId,
       name: channelName,
       description: channelDescription
     }
@@ -32,45 +32,48 @@ function AddChannelForm() {
 
       setErrors([]);
       setChannelName('');
-      history.push({
-        pathname: `/servers/${newChannel.serverId}/channels`,
-        state: { channelId: data.id }
-      })
+      onClose();
+      history.push(`/servers/${serverId}/channels/${data.id}`)
       return;
     }
 
     setErrors(['Please provide a name for your new Planet'])
   }
 
-  if (!location.state) return <Redirect to='/' />
-
   return (
     <>
-      <h1>Create New Channel</h1>
-      {errors.length === 0 ? null : errors.map((error, i) => (
-        <div key={i}>{error}</div>
-      ))}
-      <form onSubmit={newChannel}>
-        <div>
-          <label htmlFor='name'>Channel Name</label>
-          <input
-            type='text'
-            name='name'
-            value={channelName}
-            onChange={e => setChannelName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor='description'>Channel Description</label>
-          <textarea
-            name='description'
-            placeholder='Optional'
-            value={channelDescription}
-            onChange={e => setChannelDescription(e.target.value)}
-          />
-        </div>
-        <button type='submit'>CREATE CHANNEL</button>
-      </form>
+      <div className='server-form'>
+        <div className='server-form-header'>Create New Channel</div>
+        {errors.length === 0 ? null : errors.map((error, i) => (
+          <div key={i} className='server-error'>{error}</div>
+        ))}
+        <form onSubmit={newChannel}>
+          <div className='server-input-container'>
+            <label htmlFor='name'>Channel Name</label>
+            <input
+              type='text'
+              name='name'
+              value={channelName}
+              onChange={e => setChannelName(e.target.value)}
+            />
+          </div>
+          <div className='server-input-container'>
+            <label htmlFor='description'>Channel Description</label>
+            <textarea
+              name='description'
+              placeholder='Optional'
+              value={channelDescription}
+              onChange={e => setChannelDescription(e.target.value)}
+            />
+          </div>
+          <button
+            className='server-button'
+            type='submit'
+          >
+            CREATE CHANNEL
+          </button>
+        </form>
+      </div>
     </>
   )
 }

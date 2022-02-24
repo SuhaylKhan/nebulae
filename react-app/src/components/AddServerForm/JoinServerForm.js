@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { joinServer } from "../../store/server";
+import { authenticate } from "../../store/session";
 
 function JoinServerForm({ props }) {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ function JoinServerForm({ props }) {
         return;
       }
 
+      await authenticate();
       setErrors([]);
       setInviteLink('');
       onClose();

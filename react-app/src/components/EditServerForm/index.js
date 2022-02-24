@@ -2,13 +2,15 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { deleteServer, editServer } from '../../store/server';
+import { authenticate } from '../../store/session';
 
-function EditServerForm() {
+function EditServerForm({ props }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { serverId } = useParams();
   const servers = useSelector(state => state.servers);
   const user = useSelector(state => state.session.user);
+  const { onClose } = props;
 
   const [serverName, setServerName] = useState('');
   const [errors, setErrors] = useState([]);
@@ -21,16 +23,6 @@ function EditServerForm() {
   useEffect(() => {
     if (!user) setShowConfirm(false);
     if (!showConfirm) return;
-
-    const closeMenu = e => {
-      if (e.target.className === 'confirm-delete'
-        || e.target.parentNode.className === 'confirm-delete') return;
-      setShowConfirm(false);
-    }
-
-    document.addEventListener('click', closeMenu);
-
-    return () => document.removeEventListener('click', closeMenu);
   }, [showConfirm, user])
 
   const handleSubmit = async e => {
@@ -47,6 +39,7 @@ function EditServerForm() {
 
       setErrors([]);
       setServerName('');
+      onClose();
       history.push(`/servers/${serverId}/channels`);
       return;
     }
@@ -59,10 +52,11 @@ function EditServerForm() {
     const data = await dispatch(deleteServer(serverId))
 
     if (data === 'DELETE SUCCESSFUL') {
+      dispatch(authenticate());
       if (user.servers[0]) {
         history.push(`/servers/${user.servers[0].id}/channels`);
       } else {
-        history.push(`/servers/new`);
+        history.push(`/servers`);
       }
       return
     } else if (data.errors) {
@@ -77,37 +71,42 @@ function EditServerForm() {
 
   return (
     <>
-      <h1>EDIT SERVER</h1>
-      {errors.length === 0 ? null : errors.map((error, i) => (
-        <div key={i}>{error}</div>
-      ))}
-      {servers[serverId] &&
-        <form onSubmit={handleSubmit}>
-          <label>Enter a new name</label>
-          <input
-            type='text'
-            disabled={showConfirm ? true : false}
-            placeholder={servers[serverId].name}
-            value={serverName}
-            onChange={e => setServerName(e.target.value)}
-          />
-          <button
-            type='submit'
-            disabled={showConfirm ? true : false}
-          >Update Server Name</button>
-        </form>
-      }
-      <button
-        onClick={handleClick}
-        disabled={showConfirm ? true : false}
-      >DELETE</button>
-      {showConfirm &&
-        <div>
-          <div>Are you sure you want to delete your server?</div>
-          <button onClick={handleDelete}>Yes</button>
-          <button onClick={handleClick}>No</button>
-        </div>
-      }
+      <div className='server-form'>
+        <div className='server-form-header'>EDIT SERVER</div>
+        {errors.length === 0 ? null : errors.map((error, i) => (
+          <div key={i} className='server-error'>{error}</div>
+        ))}
+        {servers[serverId] &&
+          <form onSubmit={handleSubmit}>
+            <div className='server-input-container'>
+              <label>Enter a new name</label>
+              <input
+                type='text'
+                disabled={showConfirm ? true : false}
+                placeholder={servers[serverId].name}
+                value={serverName}
+                onChange={e => setServerName(e.target.value)}
+              />
+            </div>
+            <button
+              type='submit'
+              disabled={showConfirm ? true : false}
+              className='server-button'
+            >
+              Update Server Name
+            </button>
+          </form>
+        }
+        {showConfirm ?
+          <div>
+            <div>Are you sure you want to delete your server?</div>
+            <button onClick={handleDelete}>Yes</button>
+            <button onClick={handleClick}>No</button>
+          </div>
+          :
+          <button onClick={handleClick}>DELETE</button>
+        }
+      </div>
     </>
   )
 }
