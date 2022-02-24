@@ -7,6 +7,7 @@ import Message from './Message';
 let socket;
 
 function Chat({ props }) {
+  const { channel } = props;
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const messages = useSelector(state => state.messages)
@@ -35,8 +36,11 @@ function Chat({ props }) {
 
   const sendChat = e => {
     e.preventDefault();
-    socket.emit('chat', { userId: user.id, content: chatInput, channelId: 1 });
-    setChatInput('');
+
+    if (chatInput) {
+      socket.emit('chat', { userId: user.id, content: chatInput, channelId: channel.id });
+      setChatInput('');
+    }
   }
 
   const editChat = e => {

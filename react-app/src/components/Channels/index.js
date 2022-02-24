@@ -11,6 +11,7 @@ import EditChannelForm from '../EditChannelForm';
 import { Modal } from '../../context/Modal';
 import { loadServers } from '../../store/server';
 import AddChannelForm from '../AddChannelForm';
+import { loadMessages } from '../../store/message';
 
 function Channels() {
   const dispatch = useDispatch();
@@ -25,7 +26,11 @@ function Channels() {
 
   useEffect(() => {
     dispatch(loadServers(user.id));
-  }, [dispatch, user.id])
+
+    if (currChannelId) {
+      loadMessages(currChannelId)
+    }
+  }, [dispatch, user.id, currChannelId])
 
   useEffect(() => {
     if (servers[serverId]) {
@@ -92,7 +97,7 @@ function Channels() {
           {Object.keys(servers).length === 0 &&
             <NoServers />
           }
-          {user.servers.length > 0 && servers[serverId]?.channels.length === 0 &&
+          {user.servers.length > 0 && Object.keys(channels).length === 0 &&
             <NoChannels />
           }
           {servers[serverId] && channels[currChannelId] &&
