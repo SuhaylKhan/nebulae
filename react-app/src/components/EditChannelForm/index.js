@@ -80,7 +80,7 @@ function EditChannelForm({ props }) {
           <div key={i} className='server-error'>{error}</div>
         ))}
         <form onSubmit={handleEdit}>
-          <div>
+          <div className='server-input-container'>
             <label htmlFor='name'>Enter a new channel name</label>
             <input
               type='text'
@@ -90,7 +90,7 @@ function EditChannelForm({ props }) {
               onChange={e => setChannelName(e.target.value)}
             />
           </div>
-          <div>
+          <div className='server-textarea-container'>
             <label htmlFor='description'>Update channel description</label>
             <textarea
               disabled={showConfirm ? true : false}
@@ -100,19 +100,22 @@ function EditChannelForm({ props }) {
             ></textarea>
           </div>
           <button
+            className='server-button'
             type='submit'
             disabled={showConfirm ? true : false}
           >Update Channel</button>
         </form>
 
         {showConfirm ?
-          <div>
+          <div className='confirm-container'>
             <div>Are you sure you want to delete this channel?</div>
-            <button onClick={handleDelete}>Yes</button>
-            <button onClick={handleClick}>No</button>
+            <div className='confirm-buttons'>
+              <button onClick={handleDelete}>Yes</button>
+              <button onClick={handleClick}>No</button>
+            </div>
           </div>
           :
-          <button onClick={handleClick}>DELETE</button>
+          <button className='delete-button' onClick={handleClick}>DELETE</button>
         }
       </div>
     </>
