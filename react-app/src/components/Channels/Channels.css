@@ -5,4 +5,18 @@
 
 #channels-panel {
   width: 100%;
+  background-color: var(--black3);
+  padding: 25px;
+  box-sizing: border-box;
+}
+
+#channels-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#channels-panel-header {
+  font-size: 25px;
 }

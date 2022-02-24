@@ -56,8 +56,8 @@ function Channels() {
       <div id='channels-container'>
         <div id='channels-panel'>
           {servers[serverId] &&
-            <div>
-              <div>{servers[serverId].name}</div>
+            <div id='channels-header-container'>
+              <div id='channels-panel-header'>{servers[serverId].name}</div>
               <ServerPanel server={servers[serverId]} />
             </div>
           }

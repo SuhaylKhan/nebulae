@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import EditServerForm from '../EditServerForm';
 import LeaveServer from '../LeaveServer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGear } from '@fortawesome/free-solid-svg-icons'
 
 function ServerPanel({server}) {
   const user = useSelector(state => state.session.user);
@@ -37,19 +39,22 @@ function ServerPanel({server}) {
 
   return (
     <>
-      <button onClick={handleClick}>Details</button>
+      <button className='panel-details-button' onClick={handleClick}>
+        <FontAwesomeIcon icon={faGear} />
+      </button>
       {showPanel &&
-        <div>
-          <div>Server Details</div>
+        <div id='panel-container'>
+          <div id='panel-header'>Details</div>
           {user.id === server.admin_id ?
             <div className='details-panel'>
               <button
+                className='panel-inner-button'
                 onClick={() => {
                   setShowModal(true);
                   setServerAction('EDIT');
                 }}
               >
-                EDIT
+                Edit Solar System
               </button>
             </div>
             :
