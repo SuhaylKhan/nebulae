@@ -10,6 +10,7 @@ import NoChannels from './NoChannels';
 import EditChannelForm from '../EditChannelForm';
 import { Modal } from '../../context/Modal';
 import { loadServers } from '../../store/server';
+import AddChannelForm from '../AddChannelForm';
 
 function Channels() {
   const dispatch = useDispatch();
@@ -79,10 +80,8 @@ function Channels() {
           {user.id === servers[serverId]?.admin_id &&
             <button
               onClick={() => {
-                history.push({
-                  pathname: '/channels/new',
-                  state: { serverId }
-                })
+                setShowModal(true);
+                setServerAction('CREATE');
               }}
             >
               +
@@ -105,6 +104,11 @@ function Channels() {
       {showModal && serverAction === 'EDIT' &&
         <Modal onClose={onClose}>
           <EditChannelForm props={{ channel: channels[currChannelId], onClose }} />
+        </Modal>
+      }
+      {showModal && serverAction === 'CREATE' &&
+        <Modal onClose={onClose}>
+          <AddChannelForm props={{ onClose, serverId }} />
         </Modal>
       }
     </>
