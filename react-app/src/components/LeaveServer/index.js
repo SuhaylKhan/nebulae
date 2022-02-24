@@ -19,7 +19,7 @@ function LeaveServer({ props }) {
         history.push(`/servers/${user.servers[0].id}/channels`);
       } else {
         onClose();
-        history.push(`/servers/new`);
+        history.push(`/servers`);
       }
       return;
     }

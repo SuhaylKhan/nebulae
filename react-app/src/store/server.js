@@ -1,3 +1,5 @@
+import { removeAllChannels } from "./channel";
+
 const ADD_SERVER = 'server/ADD_SERVER';
 const SET_SERVERS = 'server/SET_SERVERS';
 const REMOVE_ALL = 'server/REMOVE_ALL';
@@ -179,6 +181,7 @@ export const leaveServer = (serverId, userId) => async dispatch => {
 
   if (response.ok) {
     dispatch(removeOne(serverId));
+    dispatch(removeAllChannels());
     return 'LEAVE SUCCESSFUL';
   } else {
     return { errors: ['An error occurred. Please try again.']}

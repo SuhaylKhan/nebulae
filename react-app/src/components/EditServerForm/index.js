@@ -56,7 +56,7 @@ function EditServerForm({ props }) {
       if (user.servers[0]) {
         history.push(`/servers/${user.servers[0].id}/channels`);
       } else {
-        history.push(`/servers/new`);
+        history.push(`/servers`);
       }
       return
     } else if (data.errors) {

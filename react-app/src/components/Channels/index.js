@@ -89,7 +89,7 @@ function Channels() {
           }
         </div>
         <div>
-          {user.servers.length === 0 &&
+          {Object.keys(servers).length === 0 &&
             <NoServers />
           }
           {user.servers.length > 0 && servers[serverId]?.channels.length === 0 &&
