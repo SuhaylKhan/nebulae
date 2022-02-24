@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { deleteServer, editServer } from '../../store/server';
 import { authenticate } from '../../store/session';
+import './EditServerForm.css';
 
 function EditServerForm({ props }) {
   const dispatch = useDispatch();
@@ -72,7 +73,7 @@ function EditServerForm({ props }) {
   return (
     <>
       <div className='server-form'>
-        <div className='server-form-header'>EDIT SERVER</div>
+        <div className='server-form-header'>EDIT SOLAR SYSTEM</div>
         {errors.length === 0 ? null : errors.map((error, i) => (
           <div key={i} className='server-error'>{error}</div>
         ))}
@@ -93,18 +94,20 @@ function EditServerForm({ props }) {
               disabled={showConfirm ? true : false}
               className='server-button'
             >
-              Update Server Name
+              Update Solar System
             </button>
           </form>
         }
         {showConfirm ?
-          <div>
-            <div>Are you sure you want to delete your server?</div>
-            <button onClick={handleDelete}>Yes</button>
-            <button onClick={handleClick}>No</button>
+          <div className='confirm-container'>
+            <div>Are you sure you want to delete your Solar System?</div>
+            <div className='confirm-buttons'>
+              <button onClick={handleDelete}>Yes</button>
+              <button onClick={handleClick}>No</button>
+            </div>
           </div>
           :
-          <button onClick={handleClick}>DELETE</button>
+          <button className='delete-button' onClick={handleClick}>DELETE</button>
         }
       </div>
     </>

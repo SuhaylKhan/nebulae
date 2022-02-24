@@ -12,6 +12,8 @@ import { Modal } from '../../context/Modal';
 import { loadServers } from '../../store/server';
 import AddChannelForm from '../AddChannelForm';
 import { loadMessages } from '../../store/message';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGear } from '@fortawesome/free-solid-svg-icons'
 
 function Channels() {
   const dispatch = useDispatch();
@@ -56,42 +58,44 @@ function Channels() {
       <div id='channels-container'>
         <div id='channels-panel'>
           {servers[serverId] &&
-            <div>
-              <div>{servers[serverId].name}</div>
+            <div id='channels-header-container'>
+              <div id='channels-panel-header'>{servers[serverId].name}</div>
               <ServerPanel server={servers[serverId]} />
             </div>
           }
-          <div>CHANNELS</div>
-          {Object.keys(channels).map(channelId => {
-              const channel = channels[channelId];
-              return (
-                <div key={channelId}>
-                  <button
-                    onClick={() => history.push(`/servers/${channel.server_id}/channels/${channelId}`)}
-                  >{channel.name}</button>
-                  {currChannelId === channelId && user.id === servers[serverId]?.admin_id &&
+          <div id='channels-list'>
+            <div id='channels-list-header'>PLANETS</div>
+            {Object.keys(channels).map(channelId => {
+                const channel = channels[channelId];
+                return (
+                  <div className='list-channel' key={channelId}>
                     <button
-                      onClick={() => {
-                        setShowModal(true);
-                        setServerAction('EDIT')
-                      }}
-                    >
-                      edit
-                    </button>
-                  }
-                </div>
-              )
-          })}
-          {user.id === servers[serverId]?.admin_id &&
-            <button
-              onClick={() => {
-                setShowModal(true);
-                setServerAction('CREATE');
-              }}
-            >
-              +
-            </button>
-          }
+                      onClick={() => history.push(`/servers/${channel.server_id}/channels/${channelId}`)}
+                    >{channel.name}</button>
+                    {currChannelId === channelId && user.id === servers[serverId]?.admin_id &&
+                      <button
+                        onClick={() => {
+                          setShowModal(true);
+                          setServerAction('EDIT')
+                        }}
+                      >
+                        <FontAwesomeIcon icon={faGear} />
+                      </button>
+                    }
+                  </div>
+                )
+            })}
+            {user.id === servers[serverId]?.admin_id &&
+              <button
+                onClick={() => {
+                  setShowModal(true);
+                  setServerAction('CREATE');
+                }}
+              >
+                +
+              </button>
+            }
+          </div>
         </div>
         <div>
           {Object.keys(servers).length === 0 &&

@@ -50,13 +50,13 @@ function CreateServerForm({ props }) {
   return (
     <>
       <div className='server-form'>
-        <div className='server-form-header'>Create New Server</div>
+        <div className='server-form-header'>Create New Solar System</div>
         {errors.length === 0 ? null : errors.map((error, i) => (
           <div key={i} className='server-error'>{error}</div>
         ))}
         <form onSubmit={newServer}>
           <div className='server-input-container'>
-            <label htmlFor='name'>SERVER NAME</label>
+            <label htmlFor='name'>SOLAR SYSTEM NAME</label>
             <input
               type='text'
               name='name'
@@ -68,7 +68,7 @@ function CreateServerForm({ props }) {
             className='server-button'
             type='submit'
           >
-            CREATE SERVER
+            CREATE SOLAR SYSTEM
           </button>
         </form>
       </div>

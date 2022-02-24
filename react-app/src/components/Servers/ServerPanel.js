@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import EditServerForm from '../EditServerForm';
 import LeaveServer from '../LeaveServer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGears } from '@fortawesome/free-solid-svg-icons'
 
 function ServerPanel({server}) {
   const user = useSelector(state => state.session.user);
@@ -15,8 +17,8 @@ function ServerPanel({server}) {
     if (!showPanel) return;
 
     const closeMenu = e => {
-      if (e.target.className === 'details-panel'
-        || e.target.parentNode?.className === 'details-panel') return;
+      if (e.target.className === 'dont-close'
+        || e.target.parentNode?.className === 'dont-close') return;
       setShowPanel(false);
     }
 
@@ -37,30 +39,43 @@ function ServerPanel({server}) {
 
   return (
     <>
-      <button onClick={handleClick}>Details</button>
+      <button className='panel-details-button' onClick={handleClick}>
+        <FontAwesomeIcon icon={faGears} />
+      </button>
       {showPanel &&
-        <div>
-          <div>Server Details</div>
+        <div id='panel-container' className='dont-close'>
+          <div id='panel-header' className='dont-close'>
+            <div>Details</div>
+            <div id='panel-links' className='dont-close'>
+              <div>Invite links:</div>
+              <div className='dont-close'>
+                <div>https://nebulae.gg/{server.name}#{server.id}</div>
+                <div>{server.name}#{server.id}</div>
+              </div>
+            </div>
+          </div>
           {user.id === server.admin_id ?
             <div className='details-panel'>
               <button
+                className='panel-inner-button'
                 onClick={() => {
                   setShowModal(true);
                   setServerAction('EDIT');
                 }}
               >
-                EDIT
+                Edit Solar System
               </button>
             </div>
             :
             <div className='details-panel'>
               <button
+                className='panel-inner-button'
                 onClick={() => {
                   setShowModal(true);
                   setServerAction('LEAVE');
                 }}
               >
-                LEAVE
+                Leave Solar System
               </button>
             </div>
           }

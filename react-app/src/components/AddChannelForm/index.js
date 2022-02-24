@@ -43,13 +43,13 @@ function AddChannelForm({ props }) {
   return (
     <>
       <div className='server-form'>
-        <div className='server-form-header'>Create New Channel</div>
+        <div className='server-form-header'>Create New Planet</div>
         {errors.length === 0 ? null : errors.map((error, i) => (
           <div key={i} className='server-error'>{error}</div>
         ))}
         <form onSubmit={newChannel}>
           <div className='server-input-container'>
-            <label htmlFor='name'>Channel Name</label>
+            <label htmlFor='name'>Planet Name</label>
             <input
               type='text'
               name='name'
@@ -57,8 +57,8 @@ function AddChannelForm({ props }) {
               onChange={e => setChannelName(e.target.value)}
             />
           </div>
-          <div className='server-input-container'>
-            <label htmlFor='description'>Channel Description</label>
+          <div className='server-textarea-container'>
+            <label htmlFor='description'>Planet Description</label>
             <textarea
               name='description'
               placeholder='Optional'
@@ -70,7 +70,7 @@ function AddChannelForm({ props }) {
             className='server-button'
             type='submit'
           >
-            CREATE CHANNEL
+            CREATE PLANET
           </button>
         </form>
       </div>

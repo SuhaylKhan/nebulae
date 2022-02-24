@@ -34,13 +34,13 @@ function JoinServerForm({ props }) {
       return;
     }
 
-    setErrors(['Please provide a server invite']);
+    setErrors(['Please provide an invite']);
   }
 
   return (
     <>
       <div className='server-form'>
-        <div className='server-form-header'>Join Server</div>
+        <div className='server-form-header'>Join Solar System</div>
         {errors.length === 0 ? null : errors.map((error, i) => (
           <div key={i} className='server-error'>{error}</div>
         ))}
@@ -57,15 +57,15 @@ function JoinServerForm({ props }) {
           <div className='invite-example'>
             <div>INVITES SHOULD LOOK LIKE</div>
             <ul>
-              <li>ServerName#1234</li>
-              <li>https://nebulae.gg/ServerName#1234</li>
+              <li>SolarSystemName#1234</li>
+              <li>https://nebulae.gg/SolarSystemName#1234</li>
             </ul>
           </div>
           <button
             className='server-button'
             type='submit'
           >
-            JOIN SERVER
+            JOIN SOLAR SYSTEM
           </button>
         </form>
       </div>

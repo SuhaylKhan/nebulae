@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faPencil } from '@fortawesome/free-solid-svg-icons';
 
 function Message({ props }) {
   const { message, editChat, deleteChat } = props;
@@ -37,26 +39,31 @@ function Message({ props }) {
             editChat(e);
           }}
         >
-          <input
-            placeholder={message.content}
-            value={editInput}
-            onChange={e => setEditInput(e.target.value)}
-          />
-          <button type="submit">Submit</button>
+          <div className="content-user">{message.user.username}</div>
+          <div className="content-form-components">
+            <input
+              className="content-edit-input"
+              placeholder={message.content}
+              value={editInput}
+              onChange={e => setEditInput(e.target.value)}
+            />
+            <button className='server-button' type="submit">Submit</button>
+          </div>
         </form>
         :
-        <div>
-          {`${message.user.username}: ${message.content}`}
+        <div className="content-container">
+          <div className="content-user">{message.user.username}</div>
+          <div className="content-message">{message.content}</div>
         </div>
       }
       {user.id === message.user.id &&
-        <div hidden={true}>
-          <button onClick={toggleEdit}>edit</button>
+        <div className="chat-edit-buttons" hidden={true}>
+          <button onClick={toggleEdit}><FontAwesomeIcon icon={faPencil} /></button>
           <button
             id={message.id}
             onClick={deleteChat}
           >
-            delete
+            <FontAwesomeIcon icon={faTrash} />
           </button>
         </div>
       }

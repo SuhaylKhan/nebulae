@@ -1,8 +1,58 @@
 #channels-container {
   display: grid;
   grid-template-columns: 1fr 5fr;
+
+  height: calc(1041.6px - 179.2px);
 }
 
 #channels-panel {
   width: 100%;
+  background-color: var(--black3);
+  padding: 25px;
+  box-sizing: border-box;
+}
+
+#channels-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#channels-panel-header {
+  font-size: 25px;
+}
+
+#channels-list > * {
+  margin: 20px 0;
+}
+
+#channels-list > button {
+
+}
+
+#channels-list-header {
+  font-size: 17px;
+}
+
+.list-channel {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-channel > button,
+#channels-list > button {
+  border: none;
+  background: none;
+  padding: 0;
+
+  color: var(--pinkWhite);
+  font-size: 15px;
+  transition: 0.2s;
+}
+
+.list-channel > button:hover,
+#channels-list > button:hover {
+  cursor: pointer;
+  color: var(--wildCard);
 }

@@ -1,0 +1,26 @@
+.server-form-header > span {
+  /* font-style: italic; */
+  color: var(--wildCard);
+  padding: 0 5px;
+}
+
+.leave-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.leave-container > button {
+  border: none;
+  background: none;
+  padding: 0;
+
+  font-size: 15px;
+  color: var(--pinkWhite);
+  margin-left: 40px;
+  transition: 0.2s;
+}
+
+.leave-container > button:hover {
+  cursor: pointer;
+  color: var(--wildCard);
+}
