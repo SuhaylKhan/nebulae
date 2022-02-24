@@ -29,7 +29,17 @@ const LoginForm = () => {
   };
 
   if (user) {
-    history.push(`/channels`)
+    if (user.servers.length === 0) {
+      history.push('/servers');
+    }
+
+    const server = user.servers.find(server => server.channels.length > 0);
+
+    if (server) {
+      history.push(`/servers/${server.id}/channels/${server.channels[0].id}`)
+    } else {
+      history.push(`/servers/${user.servers[0].id}/channels`)
+    }
   }
 
   return (

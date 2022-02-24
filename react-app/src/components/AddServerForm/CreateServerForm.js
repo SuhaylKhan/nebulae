@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import * as serverActions from '../../store/server';
+import { authenticate } from '../../store/session';
 
 function CreateServerForm({ props }) {
   const dispatch = useDispatch();
@@ -22,6 +23,11 @@ function CreateServerForm({ props }) {
       adminId: sessionUser.id,
     }
 
+    if (serverName.includes('#')) {
+      setErrors(["Solar System name cannot contain ' # '"]);
+      return;
+    }
+
     if (serverName) {
       const data = await dispatch(serverActions.createServer(newServer));
 
@@ -30,6 +36,7 @@ function CreateServerForm({ props }) {
         return;
       }
 
+      dispatch(authenticate());
       setErrors([]);
       setServerName('');
       onClose();

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { deleteServer, editServer } from '../../store/server';
+import { authenticate } from '../../store/session';
 
 function EditServerForm() {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ function EditServerForm() {
     const data = await dispatch(deleteServer(serverId))
 
     if (data === 'DELETE SUCCESSFUL') {
+      dispatch(authenticate());
       if (user.servers[0]) {
         history.push(`/servers/${user.servers[0].id}/channels`);
       } else {

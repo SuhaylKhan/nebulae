@@ -61,7 +61,7 @@ const SignUpForm = () => {
       return <Redirect to={`/servers/${user.servers[0].id}/channels`} />;
     }
 
-    return <Redirect to={`/servers/new`} />;
+    return <Redirect to={`/servers`} />;
   }
 
   const handleDemo = async () => {

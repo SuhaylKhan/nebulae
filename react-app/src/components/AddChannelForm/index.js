@@ -33,7 +33,7 @@ function AddChannelForm() {
       setErrors([]);
       setChannelName('');
       history.push({
-        pathname: `/servers/${newChannel.serverId}/channels`,
+        pathname: `/servers/${newChannel.serverId}/channels/${data.id}`,
         state: { channelId: data.id }
       })
       return;
