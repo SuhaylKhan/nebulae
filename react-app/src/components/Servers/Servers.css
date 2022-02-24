@@ -74,3 +74,18 @@
   cursor: pointer;
   color: var(--wildCard);
 }
+
+#panel-links {
+  font-weight: normal;
+  font-style: italic;
+  margin: 10px 0;
+}
+
+#panel-links > *:first-child {
+  font-style: normal;
+}
+
+#panel-links > *:last-child > * {
+  margin-top: 10px;
+  font-size: 13px;
+}

@@ -17,8 +17,8 @@ function ServerPanel({server}) {
     if (!showPanel) return;
 
     const closeMenu = e => {
-      if (e.target.className === 'details-panel'
-        || e.target.parentNode?.className === 'details-panel') return;
+      if (e.target.className === 'dont-close'
+        || e.target.parentNode?.className === 'dont-close') return;
       setShowPanel(false);
     }
 
@@ -43,8 +43,17 @@ function ServerPanel({server}) {
         <FontAwesomeIcon icon={faGears} />
       </button>
       {showPanel &&
-        <div id='panel-container'>
-          <div id='panel-header'>Details</div>
+        <div id='panel-container' className='dont-close'>
+          <div id='panel-header' className='dont-close'>
+            <div>Details</div>
+            <div id='panel-links' className='dont-close'>
+              <div>Invite links:</div>
+              <div className='dont-close'>
+                <div>https://nebulae.gg/{server.name}#{server.id}</div>
+                <div>{server.name}#{server.id}</div>
+              </div>
+            </div>
+          </div>
           {user.id === server.admin_id ?
             <div className='details-panel'>
               <button
