@@ -56,7 +56,6 @@ export const createMessage = message => async dispatch => {
 }
 
 export const deleteMessage = message => async dispatch => {
-  console.log('MESSAGE ===>', message)
   const response = await fetch(`/api/messages/${message.messageId}/delete`, {
     method: 'DELETE'
   })
@@ -84,7 +83,7 @@ export const updateMessage = message => async dispatch => {
       return data.errors;
     }
 
-    dispatch(editMessage(data.message));
+    dispatch(editMessage(data));
     return;
   }
 }

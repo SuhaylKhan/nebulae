@@ -7,13 +7,10 @@ import Message from './Message';
 let socket;
 
 function Chat({ props }) {
-  const user = useSelector(state => state.session.user);
-  const [chatInput, setChatInput] = useState('');
-  const [editInput, setEditInput] = useState('');
-
-  const messages = useSelector(state => state.messages)
-  const { channel } = props;
   const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user);
+  const messages = useSelector(state => state.messages)
+  const [chatInput, setChatInput] = useState('');
 
   useEffect(() => {
     socket = io();
@@ -22,8 +19,8 @@ function Chat({ props }) {
       dispatch(createMessage(chat))
     })
 
-    socket.on('edit', (edit) => {
-      dispatch(updateMessage(edit))
+    socket.on('edit', (chat) => {
+      dispatch(updateMessage(chat))
     })
 
     socket.on('delete', (chat) => {
@@ -34,7 +31,7 @@ function Chat({ props }) {
       socket.disconnect()
     })
 
-  }, [])
+  }, [dispatch])
 
   const sendChat = e => {
     e.preventDefault();
@@ -44,7 +41,10 @@ function Chat({ props }) {
 
   const editChat = e => {
     e.preventDefault();
-    socket.emit('edit', { messageId: e.target.id, content: editChat });
+
+    if (!e.target.firstChild.value) e.target.firstChild.value = messages[e.target.id].content;
+
+    socket.emit('edit', { messageId: e.target.id, content: e.target.firstChild.value });
   }
 
   const deleteChat = e => {
@@ -56,7 +56,7 @@ function Chat({ props }) {
       <div>
         {Object.values(messages).map((message, i) => {
           return (
-            <Message key={i} props={{ message, editInput, setEditInput, editChat, deleteChat }} />
+            <Message key={i} props={{ message, editChat, deleteChat }} />
           )
         })}
       </div>

@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function Message({ props }) {
-  const { message, editInput, setEditInput, editChat, deleteChat } = props;
+  const { message, editChat, deleteChat } = props;
   const user = useSelector(state => state.session.user);
   const [showEdit, setShowEdit] = useState(false);
-
-  useEffect(() => {
-    setEditInput(message.content);
-  }, [])
+  const [editInput, setEditInput] = useState(message.content);
 
   const handleMouseEnter = e => {
     e.currentTarget.lastChild.hidden = false;
@@ -35,9 +32,13 @@ function Message({ props }) {
         <form
           key={message.id}
           id={message.id}
-          onSubmit={editChat}
+          onSubmit={e => {
+            setShowEdit(false);
+            editChat(e);
+          }}
         >
           <input
+            placeholder={message.content}
             value={editInput}
             onChange={e => setEditInput(e.target.value)}
           />

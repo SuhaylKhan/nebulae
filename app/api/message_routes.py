@@ -38,7 +38,6 @@ def edit_message(id):
   """
   data = request.json
   message = ChannelMessage.query.get(id)
-  print('==========>', data)
   message.content = data['content']
   db.session.commit()
   return message.to_dict()
