@@ -56,6 +56,25 @@
   outline: 2px solid var(--wildCard);
 }
 
+.server-textarea-container {
+  display: grid;
+  grid-template-rows: 0.25fr 1fr;
+  margin-bottom: 20px;
+  text-align: start;
+}
+
+.server-textarea-container > textarea {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--black3);
+  border: 1px solid var(--outerspace);
+  color: var(--pinkWhite);
+  resize: none;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;;
+  height: 100px;
+}
+
 .server-button {
   width: 100%;
   padding: 10px;

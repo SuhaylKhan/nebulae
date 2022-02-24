@@ -4,7 +4,7 @@ import { Modal } from '../../context/Modal';
 import EditServerForm from '../EditServerForm';
 import LeaveServer from '../LeaveServer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGear } from '@fortawesome/free-solid-svg-icons'
+import { faGears } from '@fortawesome/free-solid-svg-icons'
 
 function ServerPanel({server}) {
   const user = useSelector(state => state.session.user);
@@ -40,7 +40,7 @@ function ServerPanel({server}) {
   return (
     <>
       <button className='panel-details-button' onClick={handleClick}>
-        <FontAwesomeIcon icon={faGear} />
+        <FontAwesomeIcon icon={faGears} />
       </button>
       {showPanel &&
         <div id='panel-container'>
@@ -60,12 +60,13 @@ function ServerPanel({server}) {
             :
             <div className='details-panel'>
               <button
+                className='panel-inner-button'
                 onClick={() => {
                   setShowModal(true);
                   setServerAction('LEAVE');
                 }}
               >
-                LEAVE
+                Leave Solar System
               </button>
             </div>
           }
