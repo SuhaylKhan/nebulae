@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createMessage, deleteMessage, updateMessage } from '../../store/message';
 import Message from './Message';
+import './Chat.css';
 
 let socket;
 
@@ -57,20 +58,23 @@ function Chat({ props }) {
 
   return (
     <>
-      <div>
-        {Object.values(messages).map((message, i) => {
-          return (
-            <Message key={i} props={{ message, editChat, deleteChat }} />
-          )
-        })}
+      <div id='chat-container'>
+        <div id='message-list-container'>
+          {Object.values(messages).map((message, i) => {
+            return (
+              <Message key={i} props={{ message, editChat, deleteChat }} />
+            )
+          })}
+        </div>
+        <form id='create-chat-input' onSubmit={sendChat}>
+          <input
+            className="content-edit-input"
+            value={chatInput}
+            onChange={e => setChatInput(e.target.value)}
+          />
+          <button className='server-button' type='submit'>Send</button>
+        </form>
       </div>
-      <form onSubmit={sendChat}>
-        <input
-          value={chatInput}
-          onChange={e => setChatInput(e.target.value)}
-        />
-        <button type='submit'>Send</button>
-      </form>
     </>
   )
 }

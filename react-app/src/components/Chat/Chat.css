@@ -1,0 +1,78 @@
+#chat-container {
+  padding-bottom: 25px;
+  display: grid;
+  grid-template-rows: 10fr 1fr;
+  height: calc(862.4px - 110.8px);
+  box-sizing: border-box;
+}
+
+#message-list-container {
+  align-self: flex-end;
+}
+
+#message-list-container > * {
+  padding: 25px 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#message-list-container > *:hover {
+  background-color: rgba(105, 105, 105, 0.25);
+}
+
+#message-list-container > * > form {
+  width: 100%;
+}
+
+.content-form-components {
+  display: flex;
+}
+
+.content-form-components > button {
+  width: fit-content;
+  margin-left: 5px;
+}
+
+.content-user {
+  font-weight: bold;
+}
+
+.chat-edit-buttons > button {
+  border: none;
+  background: none;
+  padding: 0;
+
+  color: var(--pinkWhite);
+  margin-left: 25px;
+  transition: 0.2s;
+}
+
+.chat-edit-buttons > button:hover {
+  color: var(--wildCard);
+  cursor: pointer;
+}
+
+.content-edit-input {
+  font-size: 15px;
+  color: var(--pinkWhite);
+  background-color: var(--black3);
+  border-radius: 5px;
+  border: 1px solid var(--outerspace);
+  padding: 10px;
+  width: 100%;
+}
+
+#create-chat-input {
+  padding: 25px 50px;
+  display: grid;
+  grid-template-columns: 10fr 1fr;
+  column-gap: 5px;
+}
+
+.content-edit-input:focus-visible {
+  outline: 2px solid var(--wildCard);
+}
+
+#create-chat-input > * {
+  box-sizing: border-box;
+}

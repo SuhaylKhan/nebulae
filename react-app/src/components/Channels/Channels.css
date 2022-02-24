@@ -1,6 +1,8 @@
 #channels-container {
   display: grid;
   grid-template-columns: 1fr 5fr;
+
+  height: calc(1041.6px - 179.2px);
 }
 
 #channels-panel {

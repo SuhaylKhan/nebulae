@@ -1,0 +1,17 @@
+#channel-container {
+  height: 100%;
+}
+
+#channel-header {
+  background-color: var(--black2);
+  padding: 25px 50px;
+}
+
+#channel-header > *:first-child {
+  font-size: 25px;
+}
+
+#channel-header > *:last-child {
+  font-style: italic;
+  color: var(--white2);
+}
