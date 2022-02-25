@@ -76,25 +76,25 @@ function EditChannelForm({ props }) {
   return (
     <>
       <div className='server-form'>
-        <div className='server-form-header'>EDIT CHANNEL</div>
+        <div className='server-form-header'>EDIT PLANET</div>
         {errors.length === 0 ? null : errors.map((error, i) => (
           <div key={i} className='server-error'>{error}</div>
         ))}
         <form onSubmit={handleEdit}>
           <div className='server-input-container'>
-            <label htmlFor='name'>Enter a new channel name</label>
+            <label htmlFor='name'>Enter a new Planet name</label>
             <input
               type='text'
-              disabled={showConfirm ? true : false}
+              // disabled={showConfirm ? true : false}
               placeholder={channel?.name}
               value={channelName}
               onChange={e => setChannelName(e.target.value)}
             />
           </div>
           <div className='server-textarea-container'>
-            <label htmlFor='description'>Update channel description</label>
+            <label htmlFor='description'>Update Planet description</label>
             <textarea
-              disabled={showConfirm ? true : false}
+              // disabled={showConfirm ? true : false}
               placeholder={channel?.description}
               value={channelDescription}
               onChange={e => setChannelDescription(e.target.value)}
@@ -103,13 +103,13 @@ function EditChannelForm({ props }) {
           <button
             className='server-button'
             type='submit'
-            disabled={showConfirm ? true : false}
-          >Update Channel</button>
+            // disabled={showConfirm ? true : false}
+          >Update Planet</button>
         </form>
 
         {showConfirm ?
           <div className='confirm-container'>
-            <div>Are you sure you want to delete this channel?</div>
+            <div>Are you sure you want to delete this Planet?</div>
             <div className='confirm-buttons'>
               <button onClick={handleDelete}>Yes</button>
               <button onClick={handleClick}>No</button>
