@@ -222,3 +222,65 @@ Users can:
 
 - `user_id` references `users.id`
 - `direct_channel_id` references `direct_channels.id`
+
+# Frontend Routes
+
+## Splash / User Auth
+
+- `/`
+- `/login`
+- `/sign-up`
+
+## Solar Systems / Channels / Chat
+
+- `/servers`
+- `/servers/:server_id/channels`
+- `/servers/:server_id/channels/:channel_id`
+
+# Backend Routes
+
+## Auth
+
+All auth routes begin with `/api/auth`
+
+- GET `/`
+- GET `/logout`
+- GET `/unauthorized`
+- POST `/login'
+- POST `/signup`
+
+## Channel
+
+All channel routes begin with `/api/channels`
+
+- GET `/:channel_id/messages`
+- POST `/new`
+- PUT `/:channel_id/edit`
+- DELETE `/:channel_id/delete`
+
+## Message
+
+All message routes begin with `/api/messages`
+
+- POST `/new`
+- PUT `/:message_id/edit`
+- DELETE `/:message_id/delete`
+
+## Server
+
+All server routes begin with `/api/servers`
+
+- GET `/:server_id/channels`
+- POST `/new`
+- POST `/:server_id/join`
+- POST `/:server_id/leave`
+- PUT `/:server_id/edit`
+- DELETE `/:server_id/delete`
+
+## User
+
+All user routes begin with `/api/users`
+
+- GET `/`
+- GET `/:user_id`
+- GET `/:user_id/servers`
