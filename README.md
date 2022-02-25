@@ -79,16 +79,28 @@ Users can:
 
 # Feature List
 
+![overview](/wiki-images/nebulae-overview.png)
+
 # User Authorization / Authentication
 
 - Users can create accounts
 - Users can log in with the credentials they used during account creation
 - Logged in users can access Solar Systems they have created or joined
 
+![login](/wiki-images/nebulae-log-in.png)
+
+![signup](/wiki-images/nebulae-sign-up.png)
+
 # Solar Systems (servers)
 
 - Users can create Solar Systems and edit / delete existing Solar Systems that they have created
 - Users join Solar Systems that they have been invited to
+
+![create server](/wiki-images/nebulae-create-server.png)
+
+![join server](/wiki-images/nebulae-join-server.png)
+
+![edit server](/wiki-images/nebulae-edit-server.png)
 
 # Planets (channels)
 
