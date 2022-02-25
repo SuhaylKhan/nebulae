@@ -90,6 +90,15 @@
   color: var(--wildCard);
 }
 
+.server-button:disabled {
+  opacity: 0.5;
+}
+
+.server-button:disabled:hover {
+  cursor: default;
+  color: var(--pinkWhite);
+}
+
 .server-error {
   font-size: 13px;
   font-style: italic;
