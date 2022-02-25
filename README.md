@@ -1,3 +1,21 @@
+# Nebulae
+
+[Nebulae](https://nebulae-app.herokuapp.com/) is a live messaging application inspired by Discord where users can invite friends to Solar Systems they have created and message each other from within Planets.
+
+Users can:
+- Create an account or use the demo login
+- Log in and out using an account they have created
+- Create and join Solar Systems
+- Edit and delete Solar Systems they have created
+- Create Planets within Solar Systems
+- Edit and delete Planets they have created
+- Live chat with other users within the same Planet of a Solar System they have created or joined
+
+
+---
+
+
+
 # Flask React Project
 
 This is the starter for the Flask React project.
