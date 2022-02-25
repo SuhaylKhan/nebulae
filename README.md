@@ -127,7 +127,7 @@ Users can:
 
 ![database schema](/wiki-images/nebulae-db-schema.png)
 
-# users
+## users
 
 | Column Name     | Datatype     | Constraints      |
 |-----------------|--------------|------------------|
@@ -140,7 +140,7 @@ Users can:
 | created_at      | TIMESTAMP    | NOT NULL         |
 | updated_at      | TIMESTAMP    | NOT NULL         |
 
-# servers
+## servers
 
 | Column Name | Datatype    | Constraints      |
 |-------------|-------------|------------------|
@@ -152,7 +152,7 @@ Users can:
 
 - `admin_id` references `users.id`
 
-## users_servers (association table)
+### users_servers (association table)
 
 | Column Name | Datatype  | Constraints  |
 |-------------|-----------|--------------|
@@ -163,7 +163,7 @@ Users can:
 - `user_id` references `users.id`
 - `server_id` references `servers.id`
 
-# channels
+## channels
 
 | Column Name | Datatype      | Constraints  |
 |-------------|---------------|--------------|
@@ -176,7 +176,7 @@ Users can:
 
 - `server_id` references `servers.id`
 
-# channel_messages
+## channel_messages
 
 | Column Name | Datatype      | Constraints  |
 |-------------|---------------|--------------|
@@ -190,7 +190,7 @@ Users can:
 - `user_id` references `users.id`
 - `channel_id` references `channels.id`
 
-# direct_channels
+## direct_channels
 
 | Column Name | Datatype      | Constraints  |
 |-------------|---------------|--------------|
@@ -198,7 +198,7 @@ Users can:
 | created_at  | TIMESTAMP     | NOT NULL     |
 | updated_at  | TIMESTAMP     | NOT NULL     |
 
-## users_direct_channels (association table)
+### users_direct_channels (association table)
 
 | Column Name       | Datatype  | Constraints  |
 |-------------------|-----------|--------------|
@@ -209,7 +209,7 @@ Users can:
 - `user_id` references `users.id`
 - `direct_channel_id` references `direct_channels.id`
 
-# direct_messages
+## direct_messages
 
 | Column Name       | Datatype      | Constraints  |
 |-------------------|---------------|--------------|
