@@ -107,6 +107,10 @@ Users can:
 - Users can create Planets within Solar Systems and edit / delete existing Planets within Solar Systems that they have joined
 - Users can live chat with other users within channels
 
+![create channel](/wiki-images/nebulae-create-channel.png)
+
+![edit channel](/wiki-images/nebulae-edit-channel.png)
+
 # Live Chat
 
 - Users can post live messages within Planets of Solar Systems that they have created / joined
