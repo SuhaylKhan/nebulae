@@ -34,12 +34,12 @@ function HomePage() {
           </div>
         </div>
         <div className='home-small-image-1'>
-          <img src={homeImg1} />
+          <img src={homeImg1} alt='space' />
         </div>
       </div>
       <div className='home-containers-1'>
         <div className='home-small-image-2'>
-          <img src={homeImg2} />
+          <img src={homeImg2} alt='space' />
         </div>
         <div className='home-text-container'>
           <div className='home-big-header'>
