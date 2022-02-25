@@ -18,6 +18,7 @@ function Chat({ props }) {
     socket = io();
 
     socket.on('chat', (chat) => {
+      console.log('HI =====')
       dispatch(loadMessages(channel.id))
     })
 
@@ -33,7 +34,7 @@ function Chat({ props }) {
       socket.disconnect()
     })
 
-  }, [dispatch])
+  }, [dispatch, channel.id])
 
   const sendChat = e => {
     e.preventDefault();

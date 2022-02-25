@@ -14,6 +14,9 @@ import AddChannelForm from '../AddChannelForm';
 import { loadMessages } from '../../store/message';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear } from '@fortawesome/free-solid-svg-icons'
+import  { io } from 'socket.io-client';
+
+let socket;
 
 function Channels() {
   const dispatch = useDispatch();
@@ -25,6 +28,19 @@ function Channels() {
 
   const [showModal, setShowModal] = useState(false);
   const [serverAction, setServerAction] = useState('');
+
+  useEffect(() => {
+    socket = io();
+
+    socket.on('deleteChannel', () => {
+      console.log('DOES THIS WORK ========')
+      dispatch(loadChannels(serverId))
+    })
+
+    return (() => {
+      socket.disconnect()
+    })
+  }, [dispatch, serverId])
 
   useEffect(() => {
     dispatch(loadServers(user.id));
@@ -112,7 +128,7 @@ function Channels() {
 
       {showModal && serverAction === 'EDIT' &&
         <Modal onClose={onClose}>
-          <EditChannelForm props={{ channel: channels[currChannelId], onClose }} />
+          <EditChannelForm props={{ channel: channels[currChannelId], onClose, socket }} />
         </Modal>
       }
       {showModal && serverAction === 'CREATE' &&
