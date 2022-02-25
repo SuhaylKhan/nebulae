@@ -49,7 +49,7 @@ function Chat({ props }) {
   const editChat = e => {
     e.preventDefault();
 
-    if (!e.target.firstChild.value) e.target.firstChild.value = messages[e.target.id].content;
+    if (!e.target.lastChild.firstChild.value) e.target.lastChild.firstChild.value = messages[e.target.id].content;
 
     socket.emit('edit', { messageId: e.target.id, content: e.target.lastChild.firstChild.value });
     dispatch(updateMessage({ messageId: e.target.id, content: e.target.lastChild.firstChild.value }))
