@@ -22,6 +22,60 @@ Users can:
 - Flask
 - SQLAlchemy
 
+# Installation
+
+1. Clone Nebulae from https://github.com/SuhaylKhan/nebulae.git
+
+## Backend
+
+1. From the root directory install backend dependencies 
+
+   ```
+   pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
+   ```
+   
+2. Create a psql user with a `PASSWORD` and `CREATEDB` priviledges
+
+3. Create a psql database with the created user as `OWNER`
+
+4. Create a `.env` file using `.env.example` as a template
+
+5. Migrate and seed your database from within Python's virtual environment
+
+   ```
+   pipenv shell
+   ```
+   ```
+   flask db migrate
+   ```
+   ```
+   flask db upgrade
+   ```
+   ```
+   flask seed all
+   ```
+   
+6. Start the backend server from within Python's virtual environment
+
+   ```
+   flask run
+   ```
+   
+## Frontend
+
+1. From `react-app` directory install frontend dependencies
+
+   ```
+   npm install
+   ```
+   
+2. Start the front end server from `react-app` directory
+
+   ```
+   npm start
+   ```
+   
+   - Nebulae should automatically open in a new tab using Google Chrome. If not, navigate to localhost:3000
 
 ---
 
