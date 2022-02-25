@@ -1,7 +1,7 @@
 import { io } from 'socket.io-client';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createMessage, deleteMessage, updateMessage } from '../../store/message';
+import { createMessage, deleteMessage, loadMessages, updateMessage } from '../../store/message';
 import Message from './Message';
 import './Chat.css';
 
@@ -18,15 +18,15 @@ function Chat({ props }) {
     socket = io();
 
     socket.on('chat', (chat) => {
-      dispatch(createMessage(chat))
+      dispatch(loadMessages(channel.id))
     })
 
     socket.on('edit', (chat) => {
-      dispatch(updateMessage(chat))
+      dispatch(loadMessages(channel.id))
     })
 
     socket.on('delete', (chat) => {
-      dispatch(deleteMessage(chat))
+      dispatch(loadMessages(channel.id))
     })
 
     return (() => {
@@ -40,6 +40,7 @@ function Chat({ props }) {
 
     if (chatInput) {
       socket.emit('chat', { userId: user.id, content: chatInput, channelId: channel.id });
+      dispatch(createMessage({ userId: user.id, content: chatInput, channelId: channel.id }))
       setChatInput('');
     }
   }
@@ -48,12 +49,14 @@ function Chat({ props }) {
     e.preventDefault();
 
     if (!e.target.firstChild.value) e.target.firstChild.value = messages[e.target.id].content;
-    
+
     socket.emit('edit', { messageId: e.target.id, content: e.target.lastChild.firstChild.value });
+    dispatch(updateMessage({ messageId: e.target.id, content: e.target.lastChild.firstChild.value }))
   }
 
   const deleteChat = e => {
     socket.emit('delete', { messageId: e.currentTarget.id });
+    dispatch(deleteMessage({ messageId: e.currentTarget.id }))
   }
 
   return (
