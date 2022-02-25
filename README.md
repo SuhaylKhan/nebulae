@@ -122,3 +122,103 @@ Users can:
 
 - Users can send private messages directly to other users of Solar Systems both users are a part of
 - Users can edit / delete private messages that they have sent
+
+# Database Schema
+
+![database schema](/wiki-images/nebulae-db-schema.png)
+
+# users
+
+| Column Name     | Datatype     | Constraints      |
+|-----------------|--------------|------------------|
+| id              | INTEGER      | PK, NOT NULL     |
+| first_name      | VARCHAR(50)  | NOT NULL         |
+| last_name       | VARCHAR(50)  | NOT NULL         |
+| username        | VARCHAR(25)  | NOT NULL, UNIQUE |
+| email           | VARCHAR(255) | NOT NULL, UNIQUE |
+| hashed_password | VARCHAR(255) | NOT NULL         |
+| created_at      | TIMESTAMP    | NOT NULL         |
+| updated_at      | TIMESTAMP    | NOT NULL         |
+
+# servers
+
+| Column Name | Datatype    | Constraints      |
+|-------------|-------------|------------------|
+| id          | INTEGER     | PK, NOT NULL     |
+| admin_id    | INTEGER     | NOT NULL, FK     |
+| name        | VARCHAR(50) | NOT NULL         |
+| created_at  | TIMESTAMP   | NOT NULL         |
+| updated_at  | TIMESTAMP   | NOT NULL         |
+
+- `admin_id` references `users.id`
+
+## users_servers (association table)
+
+| Column Name | Datatype  | Constraints  |
+|-------------|-----------|--------------|
+| user_id     | INTEGER   | NOT NULL, FK |
+| server_id   | INTEGER   | NOT NULL, FK |
+
+- association table used to facilitate many-to-many relationship between `users` and `servers`
+- `user_id` references `users.id`
+- `server_id` references `servers.id`
+
+# channels
+
+| Column Name | Datatype      | Constraints  |
+|-------------|---------------|--------------|
+| id          | INTEGER       | PK, NOT NULL |
+| server_id   | INTEGER       | NOT NULL, FK |
+| name        | VARCHAR(50)   | NOT NULL     |
+| description | VARCHAR(2000) |              |
+| created_at  | TIMESTAMP     | NOT NULL     |
+| updated_at  | TIMESTAMP     | NOT NULL     |
+
+- `server_id` references `servers.id`
+
+# channel_messages
+
+| Column Name | Datatype      | Constraints  |
+|-------------|---------------|--------------|
+| id          | INTEGER       | PK, NOT NULL |
+| user_id     | INTEGER       | NOT NULL, FK |
+| channel_id  | INTEGER       | NOT NULL, FK |
+| content     | VARCHAR(2000) | NOT NULL     |
+| created_at  | TIMESTAMP     | NOT NULL     |
+| updated_at  | TIMESTAMP     | NOT NULL     |
+
+- `user_id` references `users.id`
+- `channel_id` references `channels.id`
+
+# direct_channels
+
+| Column Name | Datatype      | Constraints  |
+|-------------|---------------|--------------|
+| id          | INTEGER       | PK, NOT NULL |
+| created_at  | TIMESTAMP     | NOT NULL     |
+| updated_at  | TIMESTAMP     | NOT NULL     |
+
+## users_direct_channels (association table)
+
+| Column Name       | Datatype  | Constraints  |
+|-------------------|-----------|--------------|
+| user_id           | INTEGER   | NOT NULL, FK |
+| direct_channel_id | INTEGER   | NOT NULL, FK |
+
+- association table used to facilitate many-to-many relationship between `users` and `direct_channels`
+- `user_id` references `users.id`
+- `direct_channel_id` references `direct_channels.id`
+
+# direct_messages
+
+| Column Name       | Datatype      | Constraints  |
+|-------------------|---------------|--------------|
+| id                | INTEGER       | PK, NOT NULL |
+| user_id           | INTEGER       | NOT NULL, FK |
+| direct_channel_id | INTEGER       | NOT NULL, FK |
+| content           | VARCHAR(2000) | NOT NULL     |
+| created_at        | TIMESTAMP     | NOT NULL     |
+| updated_at        | TIMESTAMP     | NOT NULL     |
+
+- `user_id` references `users.id`
+- `direct_channel_id` references `direct_channels.id`
