@@ -246,7 +246,7 @@ All auth routes begin with `/api/auth`
 - GET `/`
 - GET `/logout`
 - GET `/unauthorized`
-- POST `/login'
+- POST `/login`
 - POST `/signup`
 
 ## Channel
