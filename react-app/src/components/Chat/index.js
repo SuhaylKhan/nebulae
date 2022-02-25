@@ -33,7 +33,7 @@ function Chat({ props }) {
       socket.disconnect()
     })
 
-  }, [dispatch])
+  }, [dispatch, channel.id])
 
   const sendChat = e => {
     e.preventDefault();
@@ -48,7 +48,7 @@ function Chat({ props }) {
   const editChat = e => {
     e.preventDefault();
 
-    if (!e.target.firstChild.value) e.target.firstChild.value = messages[e.target.id].content;
+    if (!e.target.lastChild.firstChild.value) e.target.lastChild.firstChild.value = messages[e.target.id].content;
 
     socket.emit('edit', { messageId: e.target.id, content: e.target.lastChild.firstChild.value });
     dispatch(updateMessage({ messageId: e.target.id, content: e.target.lastChild.firstChild.value }))
@@ -63,9 +63,9 @@ function Chat({ props }) {
     <>
       <div id='chat-container'>
         <div id='message-list-container'>
-          {Object.values(messages).map((message, i) => {
+          {Object.values(messages).map((message) => {
             return (
-              <Message key={i} props={{ message, editChat, deleteChat }} />
+              <Message key={message.id} props={{ message, editChat, deleteChat }} />
             )
           })}
         </div>

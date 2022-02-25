@@ -5,7 +5,7 @@ import { editChannel, deleteChannel } from '../../store/channel';
 import { loadServers } from '../../store/server';
 
 function EditChannelForm({ props }) {
-  const { channel, onClose } = props;
+  const { channel, onClose, socket } = props;
   const dispatch = useDispatch();
   const history = useHistory();
   const { currChannelId, serverId } = useParams();
@@ -65,6 +65,7 @@ function EditChannelForm({ props }) {
     if (data === 'DELETE SUCCESSFUL') {
       await dispatch(loadServers(user.id));
       onClose();
+      socket.emit('deleteChannel', {})
       history.push(`/servers/${serverId}/channels`);
       return;
     } else if (data.errors) {

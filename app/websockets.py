@@ -22,3 +22,7 @@ def handle_edit(data):
 @socketio.on("delete")
 def handle_delete(data):
     emit("delete", data, broadcast=True)
+
+@socketio.on("deleteChannel")
+def handle_delete_channel(data):
+    emit("deleteChannel", data, broadcast=True)
