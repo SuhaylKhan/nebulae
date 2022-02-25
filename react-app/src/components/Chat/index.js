@@ -75,7 +75,13 @@ function Chat({ props }) {
             value={chatInput}
             onChange={e => setChatInput(e.target.value)}
           />
-          <button className='server-button' type='submit'>Send</button>
+          <button
+            className='server-button'
+            type='submit'
+            disabled={!chatInput ? true : false}
+          >
+            Send
+          </button>
         </form>
       </div>
     </>
