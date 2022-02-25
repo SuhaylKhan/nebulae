@@ -64,9 +64,9 @@ function Chat({ props }) {
     <>
       <div id='chat-container'>
         <div id='message-list-container'>
-          {Object.values(messages).map((message, i) => {
+          {Object.values(messages).map((message) => {
             return (
-              <Message key={i} props={{ message, editChat, deleteChat }} />
+              <Message key={message.id} props={{ message, editChat, deleteChat }} />
             )
           })}
         </div>
