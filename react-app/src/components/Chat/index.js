@@ -15,10 +15,18 @@ function Chat({ props }) {
   const [chatInput, setChatInput] = useState('');
 
   useEffect(() => {
+    const chatContainer = document.querySelector('#chat-container');
+    chatContainer.scrollTop = chatContainer.scrollHeight
+  }, [channel])
+
+  useEffect(() => {
     socket = io();
 
-    socket.on('chat', (chat) => {
-      dispatch(loadMessages(channel.id))
+    socket.on('chat', async (chat) => {
+      await dispatch(loadMessages(channel.id))
+
+      const chatContainer = document.querySelector('#chat-container');
+      chatContainer.scrollTop = chatContainer.scrollHeight
     })
 
     socket.on('edit', (chat) => {
