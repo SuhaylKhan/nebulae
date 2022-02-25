@@ -11,6 +11,17 @@ Users can:
 - Edit and delete Planets they have created
 - Live chat with other users within the same Planet of a Solar System they have created or joined
 
+# Technologies used
+
+- JavaScript
+- ReactJS
+- NodeJS
+- HTML5
+- CSS3
+- Python
+- Flask
+- SQLAlchemy
+
 
 ---
 
