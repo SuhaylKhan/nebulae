@@ -65,8 +65,6 @@ function EditChannelForm({ props }) {
     if (data === 'DELETE SUCCESSFUL') {
       await dispatch(loadServers(user.id));
       onClose();
-      console.log('ARE WE HERE AT LEAST?========')
-      console.log(socket)
       socket.emit('deleteChannel', {})
       history.push(`/servers/${serverId}/channels`);
       return;

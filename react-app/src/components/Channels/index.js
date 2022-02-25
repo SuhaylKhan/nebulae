@@ -33,7 +33,6 @@ function Channels() {
     socket = io();
 
     socket.on('deleteChannel', () => {
-      console.log('DOES THIS WORK ========')
       dispatch(loadChannels(serverId))
     })
 

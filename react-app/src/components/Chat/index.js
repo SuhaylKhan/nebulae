@@ -18,7 +18,6 @@ function Chat({ props }) {
     socket = io();
 
     socket.on('chat', (chat) => {
-      console.log('HI =====')
       dispatch(loadMessages(channel.id))
     })
 
