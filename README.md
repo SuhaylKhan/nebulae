@@ -81,7 +81,7 @@ Users can:
 
 ![overview](/wiki-images/nebulae-overview.png)
 
-# User Authorization / Authentication
+## User Authorization / Authentication
 
 - Users can create accounts
 - Users can log in with the credentials they used during account creation
@@ -91,7 +91,7 @@ Users can:
 
 ![signup](/wiki-images/nebulae-sign-up.png)
 
-# Solar Systems (servers)
+## Solar Systems (servers)
 
 - Users can create Solar Systems and edit / delete existing Solar Systems that they have created
 - Users join Solar Systems that they have been invited to
@@ -102,7 +102,7 @@ Users can:
 
 ![edit server](/wiki-images/nebulae-edit-server.png)
 
-# Planets (channels)
+## Planets (channels)
 
 - Users can create Planets within Solar Systems and edit / delete existing Planets within Solar Systems that they have joined
 - Users can live chat with other users within channels
@@ -111,7 +111,14 @@ Users can:
 
 ![edit channel](/wiki-images/nebulae-edit-channel.png)
 
-# Live Chat
+## Live Chat
 
 - Users can post live messages within Planets of Solar Systems that they have created / joined
 - Users can edit / delete messages that they have posted
+
+## Future Features
+
+### Direct Messaging
+
+- Users can send private messages directly to other users of Solar Systems both users are a part of
+- Users can edit / delete private messages that they have sent
