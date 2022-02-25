@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import './HomePage.css'
+import './HomePage.css';
+import homeImg1 from '../../images/home-image-1.png';
+import homeImg2 from '../../images/home-image-2.png';
 
 function HomePage() {
   const user = useSelector(state => state.session.user);
@@ -21,8 +23,8 @@ function HomePage() {
           </div>
         </div>
       </div>
-      <div className='home-sub-container'>
-        <div className='home-containers-2'>
+      <div className='home-containers-2'>
+        <div className='home-text-container'>
           <div className='home-big-header'>
             MAKE IT <span>LESS SO</span>
           </div>
@@ -31,9 +33,15 @@ function HomePage() {
             Invite your friends to fill the emptiness of space.
           </div>
         </div>
+        <div className='home-small-image-1'>
+          <img src={homeImg1} />
+        </div>
       </div>
-      <div className='home-sub-container'>
-        <div className='home-containers-1'>
+      <div className='home-containers-1'>
+        <div className='home-small-image-2'>
+          <img src={homeImg2} />
+        </div>
+        <div className='home-text-container'>
           <div className='home-big-header'>
             CREATE <span>GALAXY-SIZED</span> COMMUNITIES
           </div>
