@@ -83,7 +83,7 @@ function EditServerForm({ props }) {
               <label>Enter a new name</label>
               <input
                 type='text'
-                disabled={showConfirm ? true : false}
+                // disabled={showConfirm ? true : false}
                 placeholder={servers[serverId].name}
                 value={serverName}
                 onChange={e => setServerName(e.target.value)}
@@ -91,7 +91,7 @@ function EditServerForm({ props }) {
             </div>
             <button
               type='submit'
-              disabled={showConfirm ? true : false}
+              // disabled={showConfirm ? true : false}
               className='server-button'
             >
               Update Solar System
