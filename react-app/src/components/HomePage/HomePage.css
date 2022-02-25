@@ -8,6 +8,9 @@
   background-image: url('../../images/home-background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .home-containers-1 {
@@ -19,3 +22,21 @@
   height: 50vh;
   background-color: var(--outerspace);
 }
+
+.home-big-header {
+  font-family: 'Work Sans', sans-serif;
+  text-align: center;
+  font-size: 40px;
+  margin: 20px 0;
+}
+
+.home-big-header > span {
+  color: var(--wildCard);
+}
+
+.home-small-header {
+  font-size: 20px;
+  margin: 20px 0;
+}
+
+
