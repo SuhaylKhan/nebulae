@@ -40,8 +40,8 @@ function Channels() {
 
     socket.on('deleteServer', async () => {
       await dispatch(loadServers(user.id));
-      if (user.servers[0]) {
-        history.push(`/servers/${user.servers[0].id}/channels`);
+      if (Object.values(servers)[0]) {
+        history.push(`/servers/${Object.values(servers)[0].id}/channels`);
       } else {
         history.push(`/servers`);
       }
@@ -50,7 +50,7 @@ function Channels() {
     return (() => {
       socket.disconnect()
     })
-  }, [dispatch, serverId, history, user.id, user.servers])
+  }, [dispatch, serverId, history, user.id, user.servers, servers])
 
   useEffect(() => {
     dispatch(loadServers(user.id));

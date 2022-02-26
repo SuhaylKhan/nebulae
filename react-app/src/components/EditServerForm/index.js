@@ -57,7 +57,11 @@ function EditServerForm({ props }) {
 
       socket.emit('deleteServer', {});
 
-      
+      if (Object.values(servers)[0]) {
+        history.push(`/servers/${Object.values(servers)[0].id}/channels`);
+      } else {
+        history.push(`/servers`);
+      }
       return;
     } else if (data.errors) {
       setErrors(data.errors)
