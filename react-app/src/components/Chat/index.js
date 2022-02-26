@@ -43,12 +43,12 @@ function Chat({ props }) {
 
   }, [dispatch, channel.id])
 
-  const sendChat = e => {
+  const sendChat = async e => {
     e.preventDefault();
 
     if (chatInput) {
+      await dispatch(createMessage({ userId: user.id, content: chatInput, channelId: channel.id }))
       socket.emit('chat', { userId: user.id, content: chatInput, channelId: channel.id });
-      dispatch(createMessage({ userId: user.id, content: chatInput, channelId: channel.id }))
       setChatInput('');
     }
   }
