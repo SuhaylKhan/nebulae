@@ -43,28 +43,28 @@ function Chat({ props }) {
 
   }, [dispatch, channel.id])
 
-  const sendChat = e => {
+  const sendChat = async e => {
     e.preventDefault();
 
     if (chatInput) {
+      await dispatch(createMessage({ userId: user.id, content: chatInput, channelId: channel.id }))
       socket.emit('chat', { userId: user.id, content: chatInput, channelId: channel.id });
-      dispatch(createMessage({ userId: user.id, content: chatInput, channelId: channel.id }))
       setChatInput('');
     }
   }
 
-  const editChat = e => {
+  const editChat = async e => {
     e.preventDefault();
 
     if (!e.target.lastChild.firstChild.value) e.target.lastChild.firstChild.value = messages[e.target.id].content;
 
+    await dispatch(updateMessage({ messageId: e.target.id, content: e.target.lastChild.firstChild.value }))
     socket.emit('edit', { messageId: e.target.id, content: e.target.lastChild.firstChild.value });
-    dispatch(updateMessage({ messageId: e.target.id, content: e.target.lastChild.firstChild.value }))
   }
 
-  const deleteChat = e => {
-    socket.emit('delete', { messageId: e.currentTarget.id });
-    dispatch(deleteMessage({ messageId: e.currentTarget.id }))
+  const deleteChat = async e => {
+    await dispatch(deleteMessage({ messageId: e.currentTarget.id }))
+    socket.emit('delete', {});
   }
 
   return (
