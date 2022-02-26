@@ -31,6 +31,7 @@ const LoginForm = () => {
   if (user) {
     if (user.servers.length === 0) {
       history.push('/servers');
+      return null;
     }
 
     const server = user.servers.find(server => server.channels.length > 0);
