@@ -32,14 +32,16 @@ function Channels() {
   useEffect(() => {
     socket = io();
 
-    socket.on('deleteChannel', () => {
-      dispatch(loadChannels(serverId))
+    socket.on('deleteChannel', async () => {
+      await dispatch(loadServers(user.id));
+      await dispatch(loadChannels(serverId));
+      history.push(`/servers/${serverId}/channels`);
     })
 
     return (() => {
       socket.disconnect()
     })
-  }, [dispatch, serverId])
+  }, [dispatch, serverId, history, user.id])
 
   useEffect(() => {
     dispatch(loadServers(user.id));
