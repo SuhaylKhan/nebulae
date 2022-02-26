@@ -8,7 +8,7 @@ function EditChannelForm({ props }) {
   const { channel, onClose, socket } = props;
   const dispatch = useDispatch();
   const history = useHistory();
-  const { currChannelId, serverId } = useParams();
+  const { currChannelId } = useParams();
   const user = useSelector(state => state.session.user);
   const [errors, setErrors] = useState([]);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -63,10 +63,8 @@ function EditChannelForm({ props }) {
     const data = await dispatch(deleteChannel(currChannelId))
 
     if (data === 'DELETE SUCCESSFUL') {
-      await dispatch(loadServers(user.id));
       onClose();
       socket.emit('deleteChannel', {})
-      history.push(`/servers/${serverId}/channels`);
       return;
     } else if (data.errors) {
       setErrors(data.errors)

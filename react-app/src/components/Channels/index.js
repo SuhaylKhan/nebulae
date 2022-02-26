@@ -32,14 +32,25 @@ function Channels() {
   useEffect(() => {
     socket = io();
 
-    socket.on('deleteChannel', () => {
-      dispatch(loadChannels(serverId))
+    socket.on('deleteChannel', async () => {
+      await dispatch(loadServers(user.id));
+      await dispatch(loadChannels(serverId));
+      history.push(`/servers/${serverId}/channels`);
+    })
+
+    socket.on('deleteServer', async () => {
+      await dispatch(loadServers(user.id));
+      if (user.servers[0]) {
+        history.push(`/servers/${user.servers[0].id}/channels`);
+      } else {
+        history.push(`/servers`);
+      }
     })
 
     return (() => {
       socket.disconnect()
     })
-  }, [dispatch, serverId])
+  }, [dispatch, serverId, history, user.id, user.servers])
 
   useEffect(() => {
     dispatch(loadServers(user.id));
@@ -75,7 +86,7 @@ function Channels() {
           {servers[serverId] &&
             <div id='channels-header-container'>
               <div id='channels-panel-header'>{servers[serverId].name}</div>
-              <ServerPanel server={servers[serverId]} />
+              <ServerPanel props={{ server: servers[serverId], socket }} />
             </div>
           }
           <div id='channels-list'>

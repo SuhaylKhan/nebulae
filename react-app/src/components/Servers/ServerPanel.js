@@ -6,7 +6,8 @@ import LeaveServer from '../LeaveServer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGears } from '@fortawesome/free-solid-svg-icons'
 
-function ServerPanel({server}) {
+function ServerPanel({ props }) {
+  const { server, socket } = props;
   const user = useSelector(state => state.session.user);
   const [showPanel, setShowPanel] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -88,7 +89,7 @@ function ServerPanel({server}) {
       }
       {showModal && serverAction === 'EDIT' &&
         <Modal onClose={onClose}>
-          <EditServerForm props={{ onClose }} />
+          <EditServerForm props={{ onClose, socket }} />
         </Modal>
       }
     </>

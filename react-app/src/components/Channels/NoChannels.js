@@ -4,7 +4,7 @@ function NoChannels() {
       <div className="no-servers-container">
         <div className="no-servers-header">No <span>Planets</span> found</div>
         <div className="no-servers-inner-text">
-          <div div className='no-servers-flavor-text'>
+          <div className='no-servers-flavor-text'>
             Solar Systems aren't really systems if there are no Planets.
           </div>
           <div>
