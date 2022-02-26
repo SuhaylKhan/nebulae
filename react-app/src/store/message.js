@@ -2,6 +2,7 @@ const SET_MESSAGES = 'message/SET_MESSAGES';
 const ADD_MESSAGE = 'message/ADD_MESSAGE';
 const REMOVE_ONE = 'message/REMOVE_ONE';
 const EDIT_MESSAGE = 'message/EDIT_MESSAGE';
+const REMOVE_ALL = 'message/REMOVE_ALL';
 
 const initialState = {};
 
@@ -23,6 +24,10 @@ const removeOne = messageId => ({
 const editMessage = message => ({
   type: EDIT_MESSAGE,
   payload: message
+})
+
+const removeAll = () => ({
+  type: REMOVE_ALL
 })
 
 export const loadMessages = channelId => async dispatch => {
@@ -88,6 +93,11 @@ export const updateMessage = message => async dispatch => {
   }
 }
 
+export const removeAllMessages = () => async dispatch => {
+  dispatch(removeAll());
+  return;
+}
+
 export default function reducer(state = initialState, action) {
   let newState = {...state};
   switch (action.type) {
@@ -107,6 +117,9 @@ export default function reducer(state = initialState, action) {
       return newState;
     case EDIT_MESSAGE:
       newState[action.payload.id] = action.payload;
+      return newState;
+    case REMOVE_ALL:
+      newState = {};
       return newState;
     default:
       return state;

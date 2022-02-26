@@ -1,3 +1,5 @@
+import { removeAllChannels } from "./channel";
+import { removeAllMessages } from "./message";
 import { loadServers, removeAllServers } from "./server";
 
 const SET_USER = 'session/SET_USER';
@@ -70,6 +72,8 @@ export const logout = () => async (dispatch) => {
   if (response.ok) {
     dispatch(removeUser());
     dispatch(removeAllServers());
+    dispatch(removeAllChannels());
+    dispatch(removeAllMessages());
   }
 };
 
