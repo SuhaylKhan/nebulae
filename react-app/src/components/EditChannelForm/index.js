@@ -85,7 +85,6 @@ function EditChannelForm({ props }) {
             <label htmlFor='name'>Enter a new Planet name</label>
             <input
               type='text'
-              // disabled={showConfirm ? true : false}
               placeholder={channel?.name}
               value={channelName}
               onChange={e => setChannelName(e.target.value)}
@@ -94,7 +93,6 @@ function EditChannelForm({ props }) {
           <div className='server-textarea-container'>
             <label htmlFor='description'>Update Planet description</label>
             <textarea
-              // disabled={showConfirm ? true : false}
               placeholder={channel?.description}
               value={channelDescription}
               onChange={e => setChannelDescription(e.target.value)}
@@ -103,7 +101,6 @@ function EditChannelForm({ props }) {
           <button
             className='server-button'
             type='submit'
-            // disabled={showConfirm ? true : false}
           >Update Planet</button>
         </form>
 
