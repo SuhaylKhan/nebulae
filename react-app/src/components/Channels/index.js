@@ -79,7 +79,7 @@ function Channels() {
             </div>
           }
           <div id='channels-list'>
-            <div id='channels-list-header'>PLANETS</div>
+            {serverId ? <div id='channels-list-header'>PLANETS</div> : null }
             {Object.keys(channels).map(channelId => {
                 const channel = channels[channelId];
                 return (
