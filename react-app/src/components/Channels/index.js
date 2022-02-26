@@ -40,6 +40,7 @@ function Channels() {
 
     socket.on('deleteServer', async () => {
       await dispatch(loadServers(user.id));
+
       if (Object.values(servers)[0]) {
         history.push(`/servers/${Object.values(servers)[0].id}/channels`);
       } else {
