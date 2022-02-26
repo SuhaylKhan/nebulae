@@ -26,3 +26,7 @@ def handle_delete(data):
 @socketio.on("deleteChannel")
 def handle_delete_channel(data):
     emit("deleteChannel", data, broadcast=True)
+
+@socketio.on("deleteServer")
+def handle_delete_server(data):
+    emit("deleteServer", data, broadcast=True)

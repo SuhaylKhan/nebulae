@@ -6,12 +6,12 @@ import { authenticate } from '../../store/session';
 import './EditServerForm.css';
 
 function EditServerForm({ props }) {
+  const { onClose, socket } = props;
   const dispatch = useDispatch();
   const history = useHistory();
   const { serverId } = useParams();
   const servers = useSelector(state => state.servers);
   const user = useSelector(state => state.session.user);
-  const { onClose } = props;
 
   const [serverName, setServerName] = useState('');
   const [errors, setErrors] = useState([]);
@@ -54,12 +54,11 @@ function EditServerForm({ props }) {
 
     if (data === 'DELETE SUCCESSFUL') {
       dispatch(authenticate());
-      if (user.servers[0]) {
-        history.push(`/servers/${user.servers[0].id}/channels`);
-      } else {
-        history.push(`/servers`);
-      }
-      return
+
+      socket.emit('deleteServer', {});
+
+      
+      return;
     } else if (data.errors) {
       setErrors(data.errors)
     };
