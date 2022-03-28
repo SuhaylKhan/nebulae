@@ -8,7 +8,11 @@ function HomePage() {
   const user = useSelector(state => state.session.user);
 
   if (user) {
-    return <Redirect to={`/servers`} />
+    if (user.servers[0]) {
+      return <Redirect to={`/servers/${user.servers[0].id}/channels`} />;
+    }
+
+    return <Redirect to={`/servers`} />;
   }
 
   return (
