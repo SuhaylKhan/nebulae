@@ -16,6 +16,7 @@
 #nav-bar-list > * {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 #home-button > * {
@@ -35,6 +36,17 @@
   margin: 0 10px;
   text-decoration: none;
   color: var(--white3);
+
+  white-space: nowrap;
+  font-family: 'Poppins', sans-serif;
+}
+
+.nav-bar-demo {
+  border: none;
+}
+
+.nav-bar-demo:hover {
+  cursor: pointer;
 }
 
 #login-signup {
