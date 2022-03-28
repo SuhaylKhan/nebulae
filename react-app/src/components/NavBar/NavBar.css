@@ -37,6 +37,14 @@
   color: var(--white3);
 }
 
+.nav-bar-demo {
+  border: none;
+}
+
+.nav-bar-demo:hover {
+  cursor: pointer;
+}
+
 #login-signup {
   grid-column-start: 3;
 }

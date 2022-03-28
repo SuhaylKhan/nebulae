@@ -13,7 +13,7 @@ const NavBar = () => {
   const handleDemo = async () => {
     const demoEmail = 'demo@aa.io';
     const demoPassword = 'password';
-    const data = await dispatch(login(demoEmail, demoPassword));
+    await dispatch(login(demoEmail, demoPassword));
   }
 
   return (
@@ -39,7 +39,7 @@ const NavBar = () => {
               </NavLink>
             </div>
             <div className='nav-bar-navlink login-signup'>
-              <button onClick={handleDemo}>Demo</button>
+              <button className='nav-bar-demo' onClick={handleDemo}>Demo</button>
             </div>
           </li>
         }
