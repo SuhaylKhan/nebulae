@@ -24,7 +24,7 @@
     "socket.io-client": "^4.4.1"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node src/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
