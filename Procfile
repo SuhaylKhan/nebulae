@@ -1,2 +1,2 @@
 web: gunicorn app:app
-web: cd react-app && npm start
+worker: cd react-app && npm start
