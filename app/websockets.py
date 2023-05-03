@@ -3,8 +3,8 @@ import os
 
 if os.environ.get("FLASK_ENV") == "production":
     origins = [
-        "http://nebulae-app.herokuapp.com",
-        "https://nebulae-app.herokuapp.com"
+        "http://nebulae.herokuapp.com",
+        "https://nebulae.herokuapp.com"
     ]
 else:
     origins = "*"
