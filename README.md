@@ -1,6 +1,6 @@
 # Nebulae
 
-[Nebulae](https://nebulae-app.herokuapp.com/) is a live messaging application inspired by Discord where users can invite friends to Solar Systems they have created and message each other from within Planets.
+[Nebulae](https://nebulae.herokuapp.com/) is a live messaging application inspired by Discord where users can invite friends to Solar Systems they have created and message each other from within Planets.
 
 Users can:
 - Create an account or use the demo login
@@ -28,12 +28,12 @@ Users can:
 
 ## Backend
 
-1. From the root directory install backend dependencies 
+1. From the root directory install backend dependencies
 
    ```
    pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
    ```
-   
+
 2. Create a psql user with a `PASSWORD` and `CREATEDB` priviledges
 
 3. Create a psql database with the created user as `OWNER`
@@ -54,13 +54,13 @@ Users can:
    ```
    flask seed all
    ```
-   
+
 6. Start the backend server from within Python's virtual environment
 
    ```
    flask run
    ```
-   
+
 ## Frontend
 
 1. From `react-app` directory install frontend dependencies
@@ -68,13 +68,13 @@ Users can:
    ```
    npm install
    ```
-   
+
 2. Start the front end server from `react-app` directory
 
    ```
    npm start
    ```
-   
+
    - Nebulae should automatically open in a new tab using Google Chrome. If not, navigate to localhost:3000
 
 # Feature List
